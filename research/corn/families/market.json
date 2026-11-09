@@ -1,0 +1,112 @@
+{
+  "project": "${project}",
+  "name": "A: market behaviour",
+  "confirmatory": true,
+  "alpha": 0.05,
+  "correction": "holm",
+  "hypotheses": [
+    {
+      "id": "months",
+      "statement": "Mean monthly returns differ across calendar months.",
+      "direction": "two_sided",
+      "analysis": {
+        "name": "months",
+        "method": "qrs.seasonal_test",
+        "method_version": 1,
+        "inputs": {
+          "returns": {
+            "kind": "bars",
+            "dataset": "${continuous}",
+            "measure": "price_change"
+          }
+        },
+        "params": {}
+      }
+    },
+    {
+      "id": "reports",
+      "statement": "Absolute returns are larger on supply and use report sessions.",
+      "direction": "greater",
+      "analysis": {
+        "name": "reports",
+        "method": "qrs.event_test",
+        "method_version": 1,
+        "inputs": {
+          "returns": {
+            "kind": "bars",
+            "dataset": "${continuous}",
+            "measure": "price_change"
+          },
+          "events": {
+            "kind": "observations",
+            "dataset": "${wasde}",
+            "column": "EndingStocks",
+            "on": "${continuous}",
+            "max_age_days": 31
+          }
+        },
+        "params": {
+          "absolute": true
+        }
+      }
+    },
+    {
+      "id": "condition",
+      "statement": "The weekly change in crop condition predicts the next week's return.",
+      "direction": "two_sided",
+      "analysis": {
+        "name": "condition",
+        "method": "qrs.regression",
+        "method_version": 1,
+        "inputs": {
+          "feature": {
+            "kind": "observations",
+            "dataset": "${crop_progress}",
+            "column": "Condition",
+            "on": "${continuous}",
+            "max_age_days": 10
+          },
+          "returns": {
+            "kind": "bars",
+            "dataset": "${continuous}",
+            "measure": "price_change"
+          }
+        },
+        "params": {
+          "horizon": 5,
+          "sample": "changes",
+          "difference": true
+        }
+      }
+    },
+    {
+      "id": "positioning",
+      "statement": "Returns after extreme managed-money positioning differ from others.",
+      "direction": "two_sided",
+      "analysis": {
+        "name": "positioning",
+        "method": "qrs.regimes",
+        "method_version": 1,
+        "inputs": {
+          "returns": {
+            "kind": "bars",
+            "dataset": "${continuous}",
+            "measure": "price_change"
+          },
+          "label": {
+            "kind": "observations",
+            "dataset": "${cot}",
+            "column": "ManagedMoneyNet",
+            "on": "${continuous}",
+            "max_age_days": 14
+          }
+        },
+        "params": {
+          "rank": true,
+          "threshold": 0.9,
+          "min_periods": 120
+        }
+      }
+    }
+  ]
+}

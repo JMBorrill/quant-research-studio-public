@@ -1,0 +1,674 @@
+{
+  "id": "macro_ridge",
+  "version": 1,
+  "title": "Economic report and ML",
+  "description": "Long one contract while a walk-forward ridge regression predicts the next 5 sessions' return above 1%; flat otherwise. Its features are the 5-session return and RSI 14, with the growth figure and tone a model extracted from monthly economic reports, each as published by the session's close. It refits every 20 sessions on every target known so far.",
+  "required_bar": "1D",
+  "conditions": [
+    "Reports move the market: each model learns how the latest released growth figure and its tone, with recent price action, relate to the next 5 sessions' return.",
+    "Vintages, not final figures: at each close it uses the latest month's report published by then, in its latest version by then, so a revision counts only from its own publication. Figures older than 45 days are missing. It computes no surprise, which would need the consensus forecast dated before each release.",
+    "Reports are read by a model, recorded once and replayed: each figure counts from its report's publication plus a declared 5-minute processing latency. The fixture's reports are invented, so its runs are synthetic.",
+    "Costs: it enters only when the predicted 5-session return exceeds 1% (0.01). A round trip costs two $2.50 commissions and two ticks of slippage ($25), $30 in all, under 0.7% of a contract's value ($50 \u00d7 price) at the fixture's prices.",
+    "Chronological training: a model fitted at a session's close trains only on rows whose 5-session target is known by then, with means and scales from those rows only.",
+    "Long or flat only; it never sells short.",
+    "Daily bars. Signals are decided at the close and filled at the next session's open, with the backtest's commission and slippage."
+  ],
+  "fixture": {
+    "declaration": {
+      "name": "Economic report and ML template fixture",
+      "columns": {
+        "date": "Date",
+        "open": "Open",
+        "high": "High",
+        "low": "Low",
+        "close": "Close"
+      },
+      "date_format": "%Y-%m-%d",
+      "price_unit": "currency",
+      "calendar": "NYSE",
+      "instrument": {
+        "symbol": "FIX",
+        "currency": "USD",
+        "multiplier": 50,
+        "tick_size": 0.25,
+        "margin_init": 0.1,
+        "margin_maint": 0.05,
+        "expiry": "2030-12-31"
+      },
+      "evidence_class": "synthetic",
+      "source": "qrs/templates/macro_ridge.csv: a constructed price path on NYSE sessions that drifts with the latest released growth figure",
+      "redistributable": true
+    },
+    "fills": [
+      {
+        "session": "2023-04-27",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 111.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-05-25",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 102.25,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-05-26",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 102.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-06-26",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 95.5,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-07-12",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 98.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-07-31",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 102.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-08-02",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 102.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-08-11",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 101.5,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-11-13",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 96.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-11-28",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 100.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-12-12",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 98.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-01-11",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 104.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-03-01",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 100.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-03-11",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 98.5,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-04-11",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 92.25,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-04-26",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 92.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-05-13",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 93.5,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-05-29",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 97.5,
+        "commission": 2.5,
+        "slippage": 12.5
+      }
+    ],
+    "documents": {
+      "kind": "qrs/documents",
+      "name": "Economic report and ML template reports",
+      "columns": {
+        "id": "Id",
+        "published": "Published",
+        "text": "Body",
+        "title": "Title",
+        "revision": "Version",
+        "event": "Month"
+      },
+      "event_format": "%Y-%m",
+      "evidence_class": "synthetic",
+      "source": "qrs/templates/macro_ridge.documents.csv: invented monthly reports, released on the 10th (two at or near the close), some revised on the 25th, one copied by a wire service",
+      "redistributable": true,
+      "hosted_processing": false
+    },
+    "extraction": {
+      "name": "Economic report and ML template figures",
+      "documents": "sha256:b04f28bd606308416be04402939261f81198f935a722e9204d8163724a95fa81",
+      "provider": "fixture",
+      "model": "fixture",
+      "endpoint": "macro_ridge.answers.json",
+      "instructions": "Read the economic report. Give the growth figure it reports, in percent, and its tone, from -1 (very weak) to 1 (very strong). Answer with JSON only.",
+      "prompt": "Report: {title}\n\n{text}",
+      "fields": [
+        {
+          "name": "growth",
+          "description": "The output growth the report gives.",
+          "unit": "percent",
+          "minimum": -20,
+          "maximum": 20
+        },
+        {
+          "name": "tone",
+          "description": "How strong the report reads.",
+          "unit": "score",
+          "minimum": -1,
+          "maximum": 1
+        }
+      ],
+      "max_output_tokens": 60,
+      "latency_seconds": 300,
+      "capture": "macro_ridge template fixture",
+      "dedupe": true,
+      "budget": {
+        "max_requests": 30,
+        "max_cost": 0,
+        "input_price": 0,
+        "output_price": 0
+      },
+      "redistributable": true
+    }
+  },
+  "strategy": {
+    "kind": "qrs/strategy",
+    "version": 1,
+    "name": "Economic report and ML",
+    "nodes": [
+      {
+        "id": "bars",
+        "operator": "qrs.dataset",
+        "version": 1,
+        "params": {
+          "dataset_id": ""
+        }
+      },
+      {
+        "id": "change",
+        "operator": "qrs.returns",
+        "version": 1,
+        "params": {
+          "period": 5,
+          "column": "close"
+        }
+      },
+      {
+        "id": "rsi",
+        "operator": "qrs.rsi",
+        "version": 1,
+        "params": {
+          "period": 14,
+          "column": "close"
+        }
+      },
+      {
+        "id": "growth",
+        "operator": "qrs.as_of",
+        "version": 1,
+        "params": {
+          "dataset_id": "",
+          "column": "growth",
+          "max_age_days": 45
+        }
+      },
+      {
+        "id": "tone",
+        "operator": "qrs.as_of",
+        "version": 1,
+        "params": {
+          "dataset_id": "",
+          "column": "tone",
+          "max_age_days": 45
+        }
+      },
+      {
+        "id": "features",
+        "operator": "qrs.table",
+        "version": 1,
+        "params": {
+          "name": "change"
+        }
+      },
+      {
+        "id": "add_rsi",
+        "operator": "qrs.merge",
+        "version": 1,
+        "params": {
+          "name": "rsi"
+        }
+      },
+      {
+        "id": "add_growth",
+        "operator": "qrs.merge",
+        "version": 1,
+        "params": {
+          "name": "growth"
+        }
+      },
+      {
+        "id": "add_tone",
+        "operator": "qrs.merge",
+        "version": 1,
+        "params": {
+          "name": "tone"
+        }
+      },
+      {
+        "id": "target",
+        "operator": "qrs.forward_return",
+        "version": 1,
+        "params": {
+          "horizon": 5,
+          "column": "close"
+        }
+      },
+      {
+        "id": "fit",
+        "operator": "qrs.fit_ridge",
+        "version": 1,
+        "params": {
+          "min_rows": 60,
+          "every": 20,
+          "window": "expanding",
+          "alpha": 1.0
+        }
+      },
+      {
+        "id": "predict",
+        "operator": "qrs.predict",
+        "version": 1,
+        "params": {}
+      },
+      {
+        "id": "entry",
+        "operator": "qrs.threshold",
+        "version": 1,
+        "params": {
+          "comparison": ">",
+          "value": 0.01
+        }
+      },
+      {
+        "id": "exit",
+        "operator": "qrs.not",
+        "version": 1,
+        "params": {}
+      },
+      {
+        "id": "position",
+        "operator": "qrs.long_flat",
+        "version": 1,
+        "params": {
+          "quantity": 1
+        }
+      },
+      {
+        "id": "backtest",
+        "operator": "qrs.backtest",
+        "version": 1,
+        "params": {
+          "initial_cash": 100000,
+          "commission_per_contract": 2.5,
+          "slippage_ticks": 1
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "change",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "rsi",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "growth",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "tone",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "target",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "change",
+          "port": "series"
+        },
+        "target": {
+          "node": "features",
+          "port": "series"
+        }
+      },
+      {
+        "source": {
+          "node": "features",
+          "port": "table"
+        },
+        "target": {
+          "node": "add_rsi",
+          "port": "table"
+        }
+      },
+      {
+        "source": {
+          "node": "rsi",
+          "port": "series"
+        },
+        "target": {
+          "node": "add_rsi",
+          "port": "series"
+        }
+      },
+      {
+        "source": {
+          "node": "add_rsi",
+          "port": "table"
+        },
+        "target": {
+          "node": "add_growth",
+          "port": "table"
+        }
+      },
+      {
+        "source": {
+          "node": "growth",
+          "port": "series"
+        },
+        "target": {
+          "node": "add_growth",
+          "port": "series"
+        }
+      },
+      {
+        "source": {
+          "node": "add_growth",
+          "port": "table"
+        },
+        "target": {
+          "node": "add_tone",
+          "port": "table"
+        }
+      },
+      {
+        "source": {
+          "node": "tone",
+          "port": "series"
+        },
+        "target": {
+          "node": "add_tone",
+          "port": "series"
+        }
+      },
+      {
+        "source": {
+          "node": "add_tone",
+          "port": "table"
+        },
+        "target": {
+          "node": "fit",
+          "port": "features"
+        }
+      },
+      {
+        "source": {
+          "node": "target",
+          "port": "label"
+        },
+        "target": {
+          "node": "fit",
+          "port": "target"
+        }
+      },
+      {
+        "source": {
+          "node": "fit",
+          "port": "model"
+        },
+        "target": {
+          "node": "predict",
+          "port": "model"
+        }
+      },
+      {
+        "source": {
+          "node": "add_tone",
+          "port": "table"
+        },
+        "target": {
+          "node": "predict",
+          "port": "features"
+        }
+      },
+      {
+        "source": {
+          "node": "predict",
+          "port": "series"
+        },
+        "target": {
+          "node": "entry",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "entry",
+          "port": "signal"
+        },
+        "target": {
+          "node": "exit",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "entry",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "entry"
+        }
+      },
+      {
+        "source": {
+          "node": "exit",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "exit"
+        }
+      },
+      {
+        "source": {
+          "node": "position",
+          "port": "positions"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "positions"
+        }
+      }
+    ],
+    "layout": {
+      "bars": {
+        "x": 0,
+        "y": 300
+      },
+      "change": {
+        "x": 280,
+        "y": 0
+      },
+      "rsi": {
+        "x": 280,
+        "y": 120
+      },
+      "growth": {
+        "x": 280,
+        "y": 240
+      },
+      "tone": {
+        "x": 280,
+        "y": 360
+      },
+      "target": {
+        "x": 280,
+        "y": 520
+      },
+      "features": {
+        "x": 560,
+        "y": 0
+      },
+      "add_rsi": {
+        "x": 840,
+        "y": 60
+      },
+      "add_growth": {
+        "x": 1120,
+        "y": 120
+      },
+      "add_tone": {
+        "x": 1400,
+        "y": 180
+      },
+      "fit": {
+        "x": 1680,
+        "y": 300
+      },
+      "predict": {
+        "x": 1960,
+        "y": 240
+      },
+      "entry": {
+        "x": 2240,
+        "y": 240
+      },
+      "exit": {
+        "x": 2520,
+        "y": 360
+      },
+      "position": {
+        "x": 2800,
+        "y": 240
+      },
+      "backtest": {
+        "x": 3080,
+        "y": 300
+      }
+    }
+  }
+}

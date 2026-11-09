@@ -1,0 +1,13 @@
+{
+  "name": "Search surface",
+  "method": "qrs.sensitivity",
+  "method_version": 1,
+  "inputs": {
+    "trials": {
+      "kind": "experiment",
+      "experiment": "${experiment}"
+    }
+  },
+  "params": {},
+  "project": "${project}"
+}

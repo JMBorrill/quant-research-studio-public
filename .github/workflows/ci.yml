@@ -1,0 +1,93 @@
+name: CI
+
+# The standard gate, on Ubuntu: every pull request is checked on pull_request alone, so a push to its
+# branch is not checked twice; main and release tags (v*) are checked on push; any branch can be
+# checked by hand (workflow_dispatch). macOS runs in full-verification.yml.
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+# A newer push to a pull request cancels its older run. Every other run has a group of its own:
+# a group holds one pending run, which a newer one replaces, so a shared group on main would skip
+# merges that land while a run is in progress.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+# Actions are pinned to release commits. uv is pinned to the version that wrote src/qrs/runtime.lock,
+# so the lock drift test compares like with like.
+env:
+  UV_VERSION: "0.11.32"
+
+jobs:
+  python:
+    name: python (ubuntu-latest)  # its check keeps the name it had beside macOS
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # the suite took 8 minutes locally on 4 CPUs; a private repository's runner has 2
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: ${{ env.UV_VERSION }}
+      - run: uv sync --locked
+      # The whole suite in a network namespace with only loopback, as the runner user: no test may need
+      # network access or a key, the adapters' and replay's included (Phase 4B exit gate 16; the dev
+      # group installs the hosted extra). PATH is kept for the lock test's uv.
+      - run: sudo unshare --net sh -c "ip link set lo up && exec sudo -H -u $(id -un) env PATH=\"$PATH\" .venv/bin/python -m pytest -q"
+      - run: uvx ruff check src tests examples
+      - run: uvx ruff format --check src tests examples
+
+  export:
+    # Every template's bundle, and one using the example extension, reproduces its CLI run in a fresh
+    # virtualenv installed from its hashed lock (scripts/check-exports.sh, also run by the local gate).
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: ${{ env.UV_VERSION }}
+      - run: uv sync --locked
+      - run: scripts/check-exports.sh "$RUNNER_TEMP/exports"
+
+  e2e:
+    # The built studio in Chromium against the service: the Stage 3 templates drawn from an empty
+    # canvas, run and exported; others created from the gallery, the news template on exploratory
+    # features; stale saves; runs that outlive the browser; refused connections; undo and redo.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - run: npm ci && npm run build
+        working-directory: apps/studio
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: ${{ env.UV_VERSION }}
+      - run: uv sync --locked
+      - run: uv run playwright install --with-deps chromium
+      # In a network namespace with only loopback: the studio, its workers and exported bundles must
+      # need no network access (Stage 3 exit gate).
+      - run: sudo unshare --net sh -c "ip link set lo up && exec sudo -H -u $(id -un) .venv/bin/python -m pytest -q -m e2e"
+
+  studio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: apps/studio
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run gen:types && git diff --exit-code src/contracts.gen.ts
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build

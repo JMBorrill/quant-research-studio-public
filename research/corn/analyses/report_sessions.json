@@ -1,0 +1,24 @@
+{
+  "name": "Report sessions",
+  "method": "qrs.event_study",
+  "method_version": 1,
+  "inputs": {
+    "returns": {
+      "kind": "bars",
+      "dataset": "${continuous}",
+      "measure": "price_change"
+    },
+    "events": {
+      "kind": "observations",
+      "dataset": "${wasde}",
+      "column": "EndingStocks",
+      "on": "${continuous}",
+      "max_age_days": 31
+    }
+  },
+  "params": {
+    "before": 3,
+    "after": 3
+  },
+  "project": "${project}"
+}

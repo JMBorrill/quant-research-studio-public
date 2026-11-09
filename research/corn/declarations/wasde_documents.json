@@ -1,0 +1,14 @@
+{
+  "kind": "qrs/documents",
+  "name": "Monthly supply and use reports (synthetic)",
+  "evidence_class": "synthetic",
+  "source": "research/corn/fixtures/generate.py",
+  "columns": {
+    "id": "Id",
+    "published": "Published",
+    "title": "Title",
+    "text": "Body"
+  },
+  "redistributable": true,
+  "hosted_processing": false
+}

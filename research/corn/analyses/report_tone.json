@@ -1,0 +1,23 @@
+{
+  "name": "Report tone",
+  "method": "qrs.feature_return",
+  "method_version": 1,
+  "inputs": {
+    "feature": {
+      "kind": "observations",
+      "dataset": "${tone}",
+      "column": "tone",
+      "on": "${continuous}",
+      "max_age_days": 31
+    },
+    "returns": {
+      "kind": "bars",
+      "dataset": "${continuous}",
+      "measure": "price_change"
+    }
+  },
+  "params": {
+    "horizon": 5
+  },
+  "project": "${project}"
+}

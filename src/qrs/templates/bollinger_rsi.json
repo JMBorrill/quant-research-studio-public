@@ -1,0 +1,401 @@
+{
+  "id": "bollinger_rsi",
+  "version": 1,
+  "title": "Bollinger/RSI mean reversion",
+  "description": "Long one contract when the close is below the lower Bollinger Band (20, 2) and RSI(14) is below 30; flat when the close is at or above the middle band, or RSI is above 50. Exit wins. Fills at the next session's open with commission and slippage.",
+  "required_bar": "1D",
+  "conditions": [
+    "Range-bound markets: it buys sharp falls expecting a return to the 20-session average; a sustained downtrend can hold it in a losing position.",
+    "Long or flat only; it never sells short.",
+    "Daily bars. Signals are decided at the close and filled at the next session's open, with the backtest's commission and slippage."
+  ],
+  "fixture": {
+    "declaration": {
+      "name": "Bollinger/RSI template fixture",
+      "columns": {
+        "date": "Date",
+        "open": "Open",
+        "high": "High",
+        "low": "Low",
+        "close": "Close"
+      },
+      "date_format": "%Y-%m-%d",
+      "price_unit": "currency",
+      "calendar": null,
+      "instrument": {
+        "symbol": "FIX",
+        "currency": "USD",
+        "multiplier": 50,
+        "tick_size": 0.25,
+        "margin_init": 0.1,
+        "margin_maint": 0.05,
+        "expiry": "2030-12-31"
+      },
+      "evidence_class": "synthetic",
+      "source": "qrs/templates/bollinger_rsi.csv: a constructed price path whose signals are worked out in tests/test_templates.py",
+      "redistributable": true
+    },
+    "fills": [
+      {
+        "session": "2026-02-24",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 92.5,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-03-02",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 98.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-04-02",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 90.5,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-04-13",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 94.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      }
+    ]
+  },
+  "strategy": {
+    "kind": "qrs/strategy",
+    "version": 1,
+    "name": "Bollinger/RSI mean reversion",
+    "nodes": [
+      {
+        "id": "bars",
+        "operator": "qrs.dataset",
+        "version": 1,
+        "params": {
+          "dataset_id": ""
+        }
+      },
+      {
+        "id": "close",
+        "operator": "qrs.column",
+        "version": 1,
+        "params": {
+          "column": "close"
+        }
+      },
+      {
+        "id": "bands",
+        "operator": "qrs.bollinger",
+        "version": 1,
+        "params": {
+          "period": 20,
+          "k": 2.0,
+          "column": "close"
+        }
+      },
+      {
+        "id": "rsi",
+        "operator": "qrs.rsi",
+        "version": 1,
+        "params": {
+          "period": 14,
+          "column": "close"
+        }
+      },
+      {
+        "id": "below_lower",
+        "operator": "qrs.compare",
+        "version": 1,
+        "params": {
+          "comparison": "<"
+        }
+      },
+      {
+        "id": "rsi_below_30",
+        "operator": "qrs.threshold",
+        "version": 1,
+        "params": {
+          "comparison": "<",
+          "value": 30.0
+        }
+      },
+      {
+        "id": "entry_signal",
+        "operator": "qrs.all",
+        "version": 1,
+        "params": {}
+      },
+      {
+        "id": "at_or_above_middle",
+        "operator": "qrs.compare",
+        "version": 1,
+        "params": {
+          "comparison": ">="
+        }
+      },
+      {
+        "id": "rsi_above_50",
+        "operator": "qrs.threshold",
+        "version": 1,
+        "params": {
+          "comparison": ">",
+          "value": 50.0
+        }
+      },
+      {
+        "id": "exit_signal",
+        "operator": "qrs.any",
+        "version": 1,
+        "params": {}
+      },
+      {
+        "id": "position",
+        "operator": "qrs.long_flat",
+        "version": 1,
+        "params": {
+          "quantity": 1
+        }
+      },
+      {
+        "id": "backtest",
+        "operator": "qrs.backtest",
+        "version": 1,
+        "params": {
+          "initial_cash": 100000,
+          "commission_per_contract": 2.5,
+          "slippage_ticks": 1
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "close",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "bands",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "rsi",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "close",
+          "port": "series"
+        },
+        "target": {
+          "node": "below_lower",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "bands",
+          "port": "lower"
+        },
+        "target": {
+          "node": "below_lower",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "rsi",
+          "port": "series"
+        },
+        "target": {
+          "node": "rsi_below_30",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "below_lower",
+          "port": "signal"
+        },
+        "target": {
+          "node": "entry_signal",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "rsi_below_30",
+          "port": "signal"
+        },
+        "target": {
+          "node": "entry_signal",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "close",
+          "port": "series"
+        },
+        "target": {
+          "node": "at_or_above_middle",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "bands",
+          "port": "middle"
+        },
+        "target": {
+          "node": "at_or_above_middle",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "rsi",
+          "port": "series"
+        },
+        "target": {
+          "node": "rsi_above_50",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "at_or_above_middle",
+          "port": "signal"
+        },
+        "target": {
+          "node": "exit_signal",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "rsi_above_50",
+          "port": "signal"
+        },
+        "target": {
+          "node": "exit_signal",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "entry_signal",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "entry"
+        }
+      },
+      {
+        "source": {
+          "node": "exit_signal",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "exit"
+        }
+      },
+      {
+        "source": {
+          "node": "position",
+          "port": "positions"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "positions"
+        }
+      }
+    ],
+    "layout": {
+      "bars": {
+        "x": 0,
+        "y": 240
+      },
+      "close": {
+        "x": 280,
+        "y": 40
+      },
+      "bands": {
+        "x": 280,
+        "y": 240
+      },
+      "rsi": {
+        "x": 280,
+        "y": 440
+      },
+      "below_lower": {
+        "x": 560,
+        "y": 40
+      },
+      "rsi_below_30": {
+        "x": 560,
+        "y": 160
+      },
+      "at_or_above_middle": {
+        "x": 560,
+        "y": 320
+      },
+      "rsi_above_50": {
+        "x": 560,
+        "y": 440
+      },
+      "entry_signal": {
+        "x": 840,
+        "y": 100
+      },
+      "exit_signal": {
+        "x": 840,
+        "y": 380
+      },
+      "position": {
+        "x": 1120,
+        "y": 240
+      },
+      "backtest": {
+        "x": 1400,
+        "y": 240
+      }
+    }
+  }
+}

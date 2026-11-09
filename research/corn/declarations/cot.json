@@ -1,0 +1,15 @@
+{
+  "kind": "qrs/observations",
+  "name": "Managed-money net positions (synthetic)",
+  "columns": {
+    "event": "AsOf",
+    "published": "Published"
+  },
+  "event_format": "%Y-%m-%d",
+  "values": {
+    "ManagedMoneyNet": "contracts"
+  },
+  "evidence_class": "synthetic",
+  "source": "research/corn/fixtures/generate.py",
+  "redistributable": true
+}

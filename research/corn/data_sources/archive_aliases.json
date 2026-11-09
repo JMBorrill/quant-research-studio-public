@@ -1,0 +1,617 @@
+{
+  "aliases": [
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/b2774s581/hx11zc10z/latest.txt",
+      "archive_date": "2021-07-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Mon, 12 Jul 2021 16:04:57 GMT",
+      "head_checked_at": "2026-11-03T22:24:56.668382+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/kh04fk547/3197zh727/latest.txt",
+      "archive_date": "2021-06-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Thu, 10 Jun 2021 16:05:11 GMT",
+      "head_checked_at": "2026-11-03T22:24:56.653855+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/2514pf89m/wp989f04n/latest.txt",
+      "archive_date": "2021-05-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Wed, 12 May 2021 16:04:53 GMT",
+      "head_checked_at": "2026-11-03T22:24:56.667643+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/h702r223s/1544cj198/latest.txt",
+      "archive_date": "2021-04-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Fri, 09 Apr 2021 16:01:21 GMT",
+      "head_checked_at": "2026-11-03T22:24:56.709776+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/dn39xt93w/bc387c841/latest.txt",
+      "archive_date": "2021-03-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Tue, 09 Mar 2021 17:07:26 GMT",
+      "head_checked_at": "2026-11-03T22:25:03.542505+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/dv140m16d/np194335s/latest.txt",
+      "archive_date": "2021-02-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Tue, 09 Feb 2021 17:08:13 GMT",
+      "head_checked_at": "2026-11-03T22:25:03.551770+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/gf06gv276/x633fs754/latest.txt",
+      "archive_date": "2021-01-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Tue, 12 Jan 2021 17:05:08 GMT",
+      "head_checked_at": "2026-11-03T22:25:03.550198+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/ft849g262/cn69mv57z/latest.txt",
+      "archive_date": "2020-12-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Thu, 10 Dec 2020 17:06:08 GMT",
+      "head_checked_at": "2026-11-03T22:25:03.599002+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/6d570p50v/2r36vp294/latest.txt",
+      "archive_date": "2020-11-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Tue, 10 Nov 2020 17:08:17 GMT",
+      "head_checked_at": "2026-11-03T22:25:09.453607+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/bk1292082/n009ws535/latest.txt",
+      "archive_date": "2020-10-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Fri, 09 Oct 2020 16:09:08 GMT",
+      "head_checked_at": "2026-11-03T22:25:09.464357+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/dv140g79v/41688643b/latest.txt",
+      "archive_date": "2020-09-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Fri, 11 Sep 2020 16:04:29 GMT",
+      "head_checked_at": "2026-11-03T22:25:09.505473+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/gm80jj54x/vh53xj500/latest.txt",
+      "archive_date": "2020-08-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Wed, 12 Aug 2020 16:02:16 GMT",
+      "head_checked_at": "2026-11-03T22:25:09.509009+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/sb397x16q/5999nr26x/latest.txt",
+      "archive_date": "2020-07-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Fri, 10 Jul 2020 16:04:17 GMT",
+      "head_checked_at": "2026-11-03T22:25:14.911185+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/g158c396h/w0892z11m/latest.txt",
+      "archive_date": "2020-06-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Thu, 11 Jun 2020 16:01:00 GMT",
+      "head_checked_at": "2026-11-03T22:25:14.873663+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/w6634p60m/ft849909c/latest.txt",
+      "archive_date": "2020-05-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Tue, 12 May 2020 16:02:23 GMT",
+      "head_checked_at": "2026-11-03T22:25:14.895247+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/q237jb60d/th83mh344/latest.txt",
+      "archive_date": "2020-04-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Thu, 09 Apr 2020 16:01:54 GMT",
+      "head_checked_at": "2026-11-03T22:25:14.917129+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/02871d57q/fn107g352/latest.txt",
+      "archive_date": "2020-03-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Tue, 10 Mar 2020 16:10:37 GMT",
+      "head_checked_at": "2026-11-03T22:25:19.899673+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/pz50hc74s/v118rx14v/latest.txt",
+      "archive_date": "2020-02-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Tue, 11 Feb 2020 17:04:04 GMT",
+      "head_checked_at": "2026-11-03T22:25:19.946196+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/79408c82d/nc581403v/latest.txt",
+      "archive_date": "2020-01-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Fri, 10 Jan 2020 17:11:51 GMT",
+      "head_checked_at": "2026-11-03T22:25:19.925939+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/1544c4419/1831d135d/latest.txt",
+      "archive_date": "2019-12-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Tue, 10 Dec 2019 17:11:44 GMT",
+      "head_checked_at": "2026-11-03T22:25:19.904808+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/st74d522v/vq280276c/latest.txt",
+      "archive_date": "2019-11-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Nov 2019 17:05:39 GMT",
+      "head_checked_at": "2026-11-03T22:25:24.315324+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/k930cb595/4q77g6016/latest.txt",
+      "archive_date": "2019-11-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Nov 2019 17:10:35 GMT",
+      "head_checked_at": "2026-11-03T22:25:24.300531+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/dz011445t/7w62fq332/latest.txt",
+      "archive_date": "2019-11-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Nov 2019 17:08:36 GMT",
+      "head_checked_at": "2026-11-03T22:25:24.351436+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/vd66wc47s/sq87c742w/latest.txt",
+      "archive_date": "2019-10-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Thu, 10 Oct 2019 16:06:41 GMT",
+      "head_checked_at": "2026-11-03T22:25:24.306919+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/gx41mw834/vd66wb68b/latest.txt",
+      "archive_date": "2019-09-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Thu, 12 Sep 2019 16:10:44 GMT",
+      "head_checked_at": "2026-11-03T22:25:28.822436+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/sf268h73q/2f75rm64f/latest.txt",
+      "archive_date": "2019-08-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Mon, 12 Aug 2019 16:07:51 GMT",
+      "head_checked_at": "2026-11-03T22:25:28.776087+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/ks65hp42q/fx719z25c/latest.txt",
+      "archive_date": "2019-07-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Thu, 11 Jul 2019 16:07:31 GMT",
+      "head_checked_at": "2026-11-03T22:25:28.772026+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/41687t15q/ft849128x/latest.txt",
+      "archive_date": "2019-06-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Tue, 11 Jun 2019 16:03:26 GMT",
+      "head_checked_at": "2026-11-03T22:25:28.733954+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/m326m8891/t148fr359/latest.txt",
+      "archive_date": "2019-04-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Tue, 09 Apr 2019 16:13:11 GMT",
+      "head_checked_at": "2026-11-03T22:25:33.564329+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/0p096d888/7p88cp598/latest.txt",
+      "archive_date": "2019-03-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Mar 2019 17:03:21 GMT",
+      "head_checked_at": "2026-11-03T22:25:33.553583+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/nz806541q/3484zp427/latest.txt",
+      "archive_date": "2019-02-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Feb 2019 17:07:52 GMT",
+      "head_checked_at": "2026-11-03T22:25:33.564069+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/4q77fw19m/m039k909f/latest.txt",
+      "archive_date": "2018-12-14",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Fri, 14 Dec 2018 18:24:31 GMT",
+      "head_checked_at": "2026-11-03T22:25:33.607736+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/0r967743q/2227mt437/latest.txt",
+      "archive_date": "2018-12-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Tue, 11 Dec 2018 17:11:12 GMT",
+      "head_checked_at": "2026-11-03T22:25:38.578154+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/g445ch502/t722hd22w/latest.txt",
+      "archive_date": "2018-11-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Tue, 13 Nov 2018 12:37:34 GMT",
+      "head_checked_at": "2026-11-03T22:25:38.599068+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/b2774s581/t148gf75k/latest.pdf",
+      "archive_date": "2021-07-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Mon, 12 Jul 2021 16:04:50 GMT",
+      "head_checked_at": "2026-11-03T22:35:43.459848+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/kh04fk547/k06994480/latest.pdf",
+      "archive_date": "2021-06-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Thu, 10 Jun 2021 16:05:02 GMT",
+      "head_checked_at": "2026-11-03T22:35:43.447678+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/2514pf89m/c534gj23m/latest.pdf",
+      "archive_date": "2021-05-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Wed, 12 May 2021 16:04:42 GMT",
+      "head_checked_at": "2026-11-03T22:35:43.466604+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/h702r223s/jh344n06q/latest.pdf",
+      "archive_date": "2021-04-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Fri, 09 Apr 2021 16:01:12 GMT",
+      "head_checked_at": "2026-11-03T22:35:43.440611+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/dn39xt93w/dv140m731/latest.pdf",
+      "archive_date": "2021-03-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Tue, 09 Mar 2021 17:07:19 GMT",
+      "head_checked_at": "2026-11-03T22:35:48.294855+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/dv140m16d/s7527501k/latest.pdf",
+      "archive_date": "2021-02-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Tue, 09 Feb 2021 17:08:05 GMT",
+      "head_checked_at": "2026-11-03T22:35:48.306945+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/gf06gv276/ft849g92n/latest.pdf",
+      "archive_date": "2021-01-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Tue, 12 Jan 2021 17:05:47 GMT",
+      "head_checked_at": "2026-11-03T22:35:48.313266+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/ft849g262/c247fj49w/latest.pdf",
+      "archive_date": "2020-12-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page6.html",
+      "index_sha256": "08db66b88d4aa4613afb5155036bd4ba0153135fd12f0fbed4e801d8285a84b5",
+      "head_status": 200,
+      "last_modified": "Thu, 10 Dec 2020 17:05:59 GMT",
+      "head_checked_at": "2026-11-03T22:35:48.295123+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/6d570p50v/ng452846b/latest.pdf",
+      "archive_date": "2020-11-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Tue, 10 Nov 2020 17:08:10 GMT",
+      "head_checked_at": "2026-11-03T22:35:55.149712+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/bk1292082/k3569t999/latest.pdf",
+      "archive_date": "2020-10-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Fri, 09 Oct 2020 16:08:57 GMT",
+      "head_checked_at": "2026-11-03T22:35:55.199962+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/dv140g79v/k0698x33z/latest.pdf",
+      "archive_date": "2020-09-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Fri, 11 Sep 2020 16:04:24 GMT",
+      "head_checked_at": "2026-11-03T22:35:55.177290+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/gm80jj54x/vt151665j/latest.pdf",
+      "archive_date": "2020-08-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Wed, 12 Aug 2020 16:02:02 GMT",
+      "head_checked_at": "2026-11-03T22:35:55.235034+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/sb397x16q/b8516938c/latest.pdf",
+      "archive_date": "2020-07-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Fri, 10 Jul 2020 16:04:12 GMT",
+      "head_checked_at": "2026-11-03T22:36:00.287154+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/g158c396h/8910kd95z/latest.pdf",
+      "archive_date": "2020-06-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Thu, 11 Jun 2020 16:00:50 GMT",
+      "head_checked_at": "2026-11-03T22:36:00.305796+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/w6634p60m/2v23wd923/latest.pdf",
+      "archive_date": "2020-05-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Tue, 12 May 2020 16:03:12 GMT",
+      "head_checked_at": "2026-11-03T22:36:00.245103+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/q237jb60d/8910kc45j/latest.pdf",
+      "archive_date": "2020-04-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Thu, 09 Apr 2020 16:02:23 GMT",
+      "head_checked_at": "2026-11-03T22:36:00.262072+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/02871d57q/tx31r242v/latest.pdf",
+      "archive_date": "2020-03-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Tue, 10 Mar 2020 16:10:32 GMT",
+      "head_checked_at": "2026-11-03T22:36:05.451620+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/pz50hc74s/pz50hc752/latest.pdf",
+      "archive_date": "2020-02-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page7.html",
+      "index_sha256": "699b766525bf225f80db4dda2a60e55f42fd1f2fc904d456090e68d628b83d4b",
+      "head_status": 200,
+      "last_modified": "Tue, 11 Feb 2020 17:03:56 GMT",
+      "head_checked_at": "2026-11-03T22:36:05.376216+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/79408c82d/jw827v53v/latest.pdf",
+      "archive_date": "2020-01-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Fri, 10 Jan 2020 17:11:45 GMT",
+      "head_checked_at": "2026-11-03T22:36:05.423837+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/1544c4419/6108vs89v/latest.pdf",
+      "archive_date": "2019-12-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Tue, 10 Dec 2019 17:11:39 GMT",
+      "head_checked_at": "2026-11-03T22:36:05.442093+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/st74d522v/qb98mv97t/latest.pdf",
+      "archive_date": "2019-11-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Nov 2019 17:05:29 GMT",
+      "head_checked_at": "2026-11-03T22:36:10.284025+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/k930cb595/8910k788h/latest.pdf",
+      "archive_date": "2019-11-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Nov 2019 17:10:29 GMT",
+      "head_checked_at": "2026-11-03T22:36:10.281720+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/dz011445t/mg74r196p/latest.pdf",
+      "archive_date": "2019-11-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Nov 2019 17:08:20 GMT",
+      "head_checked_at": "2026-11-03T22:36:10.300477+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/vd66wc47s/q237j636h/latest.pdf",
+      "archive_date": "2019-10-10",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Thu, 10 Oct 2019 16:06:35 GMT",
+      "head_checked_at": "2026-11-03T22:36:10.294740+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/gx41mw834/9g54xw18t/latest.pdf",
+      "archive_date": "2019-09-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Thu, 12 Sep 2019 16:10:39 GMT",
+      "head_checked_at": "2026-11-03T22:36:16.865393+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/sf268h73q/0p096k137/latest.pdf",
+      "archive_date": "2019-08-12",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Mon, 12 Aug 2019 16:08:07 GMT",
+      "head_checked_at": "2026-11-03T22:36:16.849820+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/ks65hp42q/vd66w940f/latest.pdf",
+      "archive_date": "2019-07-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Thu, 11 Jul 2019 16:07:22 GMT",
+      "head_checked_at": "2026-11-03T22:36:16.851003+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/41687t15q/k0698h679/latest.pdf",
+      "archive_date": "2019-06-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page8.html",
+      "index_sha256": "02af86f9d088e0db7d5845cd3bcd1f52b4287ab6a25860748f8c372e963957ab",
+      "head_status": 200,
+      "last_modified": "Tue, 11 Jun 2019 16:03:21 GMT",
+      "head_checked_at": "2026-11-03T22:36:16.868204+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/m326m8891/ws859p558/latest.pdf",
+      "archive_date": "2019-04-09",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Tue, 09 Apr 2019 16:13:07 GMT",
+      "head_checked_at": "2026-11-03T22:36:21.729406+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/0p096d888/f7623k84w/latest.pdf",
+      "archive_date": "2019-03-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Mar 2019 17:02:58 GMT",
+      "head_checked_at": "2026-11-03T22:36:21.738350+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/nz806541q/6682x9431/latest.pdf",
+      "archive_date": "2019-02-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Fri, 08 Feb 2019 17:07:47 GMT",
+      "head_checked_at": "2026-11-03T22:36:21.756012+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/4q77fw19m/kk91fq550/latest.pdf",
+      "archive_date": "2018-12-14",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Fri, 14 Dec 2018 18:24:27 GMT",
+      "head_checked_at": "2026-11-03T22:36:21.774805+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/0r967743q/g445cj002/latest.pdf",
+      "archive_date": "2018-12-11",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Tue, 11 Dec 2018 17:10:39 GMT",
+      "head_checked_at": "2026-11-03T22:36:26.622332+00:00"
+    },
+    {
+      "url": "https://esmis.nal.usda.gov/sites/default/release-files/3t945q76s/g445ch502/6h440w87f/latest.pdf",
+      "archive_date": "2018-11-08",
+      "index_file": "index_world-agricultural-supply-and-demand-estimates_page9.html",
+      "index_sha256": "a264ec482a26910ec4c91c78b4546163c751ee8da0764022e4abd48a0741d110",
+      "head_status": 200,
+      "last_modified": "Tue, 13 Nov 2018 12:39:31 GMT",
+      "head_checked_at": "2026-11-03T22:36:26.621793+00:00"
+    }
+  ],
+  "rejected": []
+}

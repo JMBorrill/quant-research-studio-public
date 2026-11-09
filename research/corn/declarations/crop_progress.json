@@ -1,0 +1,15 @@
+{
+  "kind": "qrs/observations",
+  "name": "Crop condition, good or excellent (synthetic)",
+  "columns": {
+    "event": "Week",
+    "published": "Published"
+  },
+  "event_format": "%Y-%m-%d",
+  "values": {
+    "Condition": "percent"
+  },
+  "evidence_class": "synthetic",
+  "source": "research/corn/fixtures/generate.py",
+  "redistributable": true
+}

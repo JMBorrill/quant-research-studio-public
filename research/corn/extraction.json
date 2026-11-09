@@ -1,0 +1,29 @@
+{
+  "name": "Supply and use report tone",
+  "documents": "${wasde_documents}",
+  "provider": "fixture",
+  "model": "fixture",
+  "endpoint": "${answers}",
+  "instructions": "Read the monthly supply and use report. Give its tone for prices, from -1 (bearish) to 1 (bullish). Answer with JSON only.",
+  "prompt": "Report: {title}\n\n{text}",
+  "fields": [
+    {
+      "name": "tone",
+      "description": "The report's tone for prices.",
+      "unit": "score",
+      "minimum": -1,
+      "maximum": 1
+    }
+  ],
+  "max_output_tokens": 40,
+  "latency_seconds": 600,
+  "capture": "corn programme fixture",
+  "dedupe": false,
+  "budget": {
+    "max_requests": 200,
+    "max_cost": 0,
+    "input_price": 0,
+    "output_price": 0
+  },
+  "redistributable": true
+}

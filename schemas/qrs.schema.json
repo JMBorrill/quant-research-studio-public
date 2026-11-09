@@ -1,0 +1,2652 @@
+{
+  "$defs": {
+    "AnalysisDocument": {
+      "additionalProperties": false,
+      "description": "A research computation (Stage 5): a registered method and version, its parameters, and its\nnamed inputs, read only before `until`, and before every run's own cutoff.",
+      "properties": {
+        "inputs": {
+          "additionalProperties": {
+            "discriminator": {
+              "mapping": {
+                "bars": "#/$defs/BarsInput",
+                "equity": "#/$defs/EquityInput",
+                "experiment": "#/$defs/ExperimentInput",
+                "fills": "#/$defs/FillsInput",
+                "model": "#/$defs/ModelInput",
+                "observations": "#/$defs/ObservationsInput",
+                "record": "#/$defs/RecordInput",
+                "trial": "#/$defs/TrialInput"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/BarsInput"
+              },
+              {
+                "$ref": "#/$defs/ObservationsInput"
+              },
+              {
+                "$ref": "#/$defs/EquityInput"
+              },
+              {
+                "$ref": "#/$defs/RecordInput"
+              },
+              {
+                "$ref": "#/$defs/FillsInput"
+              },
+              {
+                "$ref": "#/$defs/ModelInput"
+              },
+              {
+                "$ref": "#/$defs/ExperimentInput"
+              },
+              {
+                "$ref": "#/$defs/TrialInput"
+              }
+            ]
+          },
+          "type": "object"
+        },
+        "kind": {
+          "const": "qrs/analysis",
+          "default": "qrs/analysis",
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "method_version": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": true,
+          "default": {},
+          "type": "object"
+        },
+        "project": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{12}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The project the analysis belongs to; its until is capped at the project's confirmation start."
+        },
+        "since": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Leave out of the sample every session before this date; earlier data may still be read for alignment."
+        },
+        "until": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Read nothing on or after this date."
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "method",
+        "method_version",
+        "inputs"
+      ],
+      "title": "AnalysisDocument",
+      "type": "object"
+    },
+    "AnalysisInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "type": "string"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "finished_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "id": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "project": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "result_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "interrupted"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "method",
+        "status",
+        "created_at"
+      ],
+      "title": "AnalysisInfo",
+      "type": "object"
+    },
+    "BarsInput": {
+      "additionalProperties": false,
+      "description": "A bars dataset's session returns: `percent`, the close's change as a fraction, or\n`price_change`, the close's change times the multiplier, in currency per contract.",
+      "properties": {
+        "dataset": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "kind": {
+          "const": "bars",
+          "type": "string"
+        },
+        "measure": {
+          "default": "percent",
+          "enum": [
+            "percent",
+            "price_change"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "dataset"
+      ],
+      "title": "BarsInput",
+      "type": "object"
+    },
+    "Budget": {
+      "additionalProperties": false,
+      "description": "The most a recording may ask and spend (Phase 4B).",
+      "properties": {
+        "input_price": {
+          "description": "Per million input tokens.",
+          "minimum": 0,
+          "type": "number"
+        },
+        "max_cost": {
+          "description": "What the whole extraction may cost: its stored responses, plus the upper bound of those missing.",
+          "minimum": 0,
+          "type": "number"
+        },
+        "max_requests": {
+          "description": "Distinct requests the whole extraction may make, those already stored included.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "output_price": {
+          "description": "Per million output tokens.",
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "max_requests",
+        "max_cost",
+        "input_price",
+        "output_price"
+      ],
+      "title": "Budget",
+      "type": "object"
+    },
+    "ColumnMapping": {
+      "additionalProperties": false,
+      "description": "The CSV header names holding each field.",
+      "properties": {
+        "close": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "high": {
+          "type": "string"
+        },
+        "low": {
+          "type": "string"
+        },
+        "open": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "date",
+        "open",
+        "high",
+        "low",
+        "close"
+      ],
+      "title": "ColumnMapping",
+      "type": "object"
+    },
+    "ContinuousSeries": {
+      "additionalProperties": false,
+      "description": "How a continuous futures series was built from its contracts (Stage 5 amendment A3). Its prices\nare research data, not executable prices: a backtest refuses them.",
+      "properties": {
+        "adjustment": {
+          "description": "difference: earlier contracts shifted by price differences at each roll; none: spliced as traded.",
+          "enum": [
+            "difference",
+            "none"
+          ],
+          "type": "string"
+        },
+        "contracts": {
+          "description": "Every contract, in order, covering every session exactly once.",
+          "items": {
+            "$ref": "#/$defs/ContractSegment"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "roll_rule": {
+          "description": "When the series moves to the next contract, as the provider states it.",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "roll_rule",
+        "adjustment",
+        "contracts"
+      ],
+      "title": "ContinuousSeries",
+      "type": "object"
+    },
+    "ContractSegment": {
+      "additionalProperties": false,
+      "description": "One contract a continuous series is built from, and where it is used.",
+      "properties": {
+        "adjustment": {
+          "description": "Added to the contract's own prices in the series (0 for an unadjusted series).",
+          "type": "number"
+        },
+        "expiry": {
+          "description": "The contract's last trading day.",
+          "format": "date",
+          "type": "string"
+        },
+        "first_session": {
+          "description": "Its first session in the series.",
+          "format": "date",
+          "type": "string"
+        },
+        "last_session": {
+          "description": "Its last session in the series, before its expiry.",
+          "format": "date",
+          "type": "string"
+        },
+        "symbol": {
+          "description": "The contract's own symbol, such as its month code and year.",
+          "pattern": "^[A-Z0-9]{1,16}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "symbol",
+        "expiry",
+        "first_session",
+        "last_session",
+        "adjustment"
+      ],
+      "title": "ContractSegment",
+      "type": "object"
+    },
+    "DatasetManifest": {
+      "additionalProperties": false,
+      "description": "Describes an immutable daily OHLC dataset. Its canonical JSON hash is the dataset ID, so any\nchange to data or metadata produces a different dataset.",
+      "properties": {
+        "bar": {
+          "const": "1D",
+          "default": "1D",
+          "description": "One row per trading session, indexed by session date.",
+          "type": "string"
+        },
+        "data_sha256": {
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "type": "string"
+        },
+        "evidence_class": {
+          "enum": [
+            "synthetic",
+            "exploratory",
+            "retrospective",
+            "point_in_time"
+          ],
+          "type": "string"
+        },
+        "import_report": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ImportReport"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Present only on datasets imported from a file."
+        },
+        "instrument": {
+          "$ref": "#/$defs/Instrument"
+        },
+        "kind": {
+          "const": "qrs/dataset",
+          "default": "qrs/dataset",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "redistributable": {
+          "description": "Whether exports may include the data bytes.",
+          "type": "boolean"
+        },
+        "rows": {
+          "type": "integer"
+        },
+        "source": {
+          "description": "Where the data came from, e.g. the synthetic generator and its seed.",
+          "type": "string"
+        },
+        "start": {
+          "format": "date",
+          "type": "string"
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "instrument",
+        "evidence_class",
+        "source",
+        "redistributable",
+        "rows",
+        "start",
+        "end",
+        "data_sha256"
+      ],
+      "title": "DatasetManifest",
+      "type": "object"
+    },
+    "Derivation": {
+      "additionalProperties": false,
+      "description": "How a feature dataset was extracted from documents (Phase 4B). Its files, extraction.json,\nresponses.jsonl and documents.json, sit beside the data and are checked against these hashes\nwhen it is loaded.",
+      "properties": {
+        "capture": {
+          "type": "string"
+        },
+        "cost": {
+          "description": "Of the responses used, at the prices declared when each was recorded.",
+          "type": "number"
+        },
+        "documents": {
+          "description": "The documents dataset ID: the SHA-256 of documents.json, its manifest, beside the data.",
+          "type": "string"
+        },
+        "duplicates": {
+          "description": "Document versions dropped as copies of an earlier one's text.",
+          "type": "integer"
+        },
+        "extraction_sha256": {
+          "description": "Of extraction.json: the extraction document.",
+          "type": "string"
+        },
+        "hosted": {
+          "description": "Whether document text was sent to a hosted provider.",
+          "type": "boolean"
+        },
+        "input_tokens": {
+          "type": "integer"
+        },
+        "invalid_rows": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "description": "Rows with no values, by reason.",
+          "type": "object"
+        },
+        "latency_seconds": {
+          "description": "The declared processing latency.",
+          "type": "number"
+        },
+        "model": {
+          "description": "The model requested.",
+          "type": "string"
+        },
+        "output_tokens": {
+          "type": "integer"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "reported_models": {
+          "description": "Every model identifier the responses reported.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requests": {
+          "description": "Distinct requests the rows needed.",
+          "type": "integer"
+        },
+        "responses_sha256": {
+          "description": "Of responses.jsonl: each row's document version, publication time and URL, and its stored response, with its rendered request.",
+          "type": "string"
+        },
+        "retrospective_rows": {
+          "description": "Rows whose response was captured after they could be used.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "documents",
+        "extraction_sha256",
+        "responses_sha256",
+        "provider",
+        "model",
+        "reported_models",
+        "hosted",
+        "latency_seconds",
+        "capture",
+        "requests",
+        "retrospective_rows",
+        "duplicates",
+        "invalid_rows",
+        "input_tokens",
+        "output_tokens",
+        "cost"
+      ],
+      "title": "Derivation",
+      "type": "object"
+    },
+    "DocumentColumns": {
+      "additionalProperties": false,
+      "description": "The CSV header names holding each document field (Phase 4B).",
+      "properties": {
+        "estimated": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "An optional true/false column marking publication timestamps reconstructed after the fact."
+        },
+        "event": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The date the document is about; by default the UTC date of publication."
+        },
+        "id": {
+          "description": "The document's identifier, shared by all its versions.",
+          "type": "string"
+        },
+        "published": {
+          "description": "When this version was published: ISO 8601 with an explicit UTC offset.",
+          "type": "string"
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "An optional label for each version, such as 'corrected'."
+        },
+        "text": {
+          "type": "string"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Where the document came from: kept as metadata, never fetched."
+        }
+      },
+      "required": [
+        "id",
+        "published",
+        "text"
+      ],
+      "title": "DocumentColumns",
+      "type": "object"
+    },
+    "DocumentsDeclaration": {
+      "additionalProperties": false,
+      "description": "What the user declares about a CSV file of documents, such as news or reports, before it is imported.",
+      "properties": {
+        "columns": {
+          "$ref": "#/$defs/DocumentColumns"
+        },
+        "estimates": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "How the estimated publication timestamps were made; required when any row is estimated."
+        },
+        "event_format": {
+          "anyOf": [
+            {
+              "pattern": "%",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "strptime format of the event column; required when there is one."
+        },
+        "evidence_class": {
+          "description": "point_in_time requires every timestamp to be the one recorded at publication.",
+          "enum": [
+            "synthetic",
+            "exploratory",
+            "retrospective",
+            "point_in_time"
+          ],
+          "type": "string"
+        },
+        "hosted_processing": {
+          "description": "Whether the text may be sent to a hosted model provider. There is no default: it must be declared.",
+          "type": "boolean"
+        },
+        "kind": {
+          "const": "qrs/documents",
+          "description": "Tells a documents declaration from a bars or observations one.",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "redistributable": {
+          "type": "boolean"
+        },
+        "source": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "columns",
+        "evidence_class",
+        "source",
+        "redistributable",
+        "hosted_processing"
+      ],
+      "title": "DocumentsDeclaration",
+      "type": "object"
+    },
+    "DocumentsManifest": {
+      "additionalProperties": false,
+      "description": "Describes an immutable documents dataset: one row per version of each document, with the\nmoment it was published. Its canonical JSON hash is the dataset ID. No operator reads one, so a\nstrategy never sees raw text; extraction turns it into observations (Phase 4B).",
+      "properties": {
+        "columns": {
+          "$ref": "#/$defs/DocumentColumns"
+        },
+        "data_sha256": {
+          "type": "string"
+        },
+        "documents": {
+          "type": "integer"
+        },
+        "estimated_rows": {
+          "type": "integer"
+        },
+        "estimates": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "How estimated publication timestamps were made; present only when some are."
+        },
+        "event_format": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "evidence_class": {
+          "enum": [
+            "synthetic",
+            "exploratory",
+            "retrospective",
+            "point_in_time"
+          ],
+          "type": "string"
+        },
+        "hosted_processing": {
+          "type": "boolean"
+        },
+        "kind": {
+          "const": "qrs/documents",
+          "default": "qrs/documents",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "redistributable": {
+          "type": "boolean"
+        },
+        "rows": {
+          "description": "Document versions.",
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_sha256": {
+          "description": "SHA-256 of the imported file's bytes.",
+          "type": "string"
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "evidence_class",
+        "source",
+        "redistributable",
+        "hosted_processing",
+        "rows",
+        "documents",
+        "estimated_rows",
+        "data_sha256",
+        "source_sha256",
+        "columns"
+      ],
+      "title": "DocumentsManifest",
+      "type": "object"
+    },
+    "Edge": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/PortRef"
+        },
+        "target": {
+          "$ref": "#/$defs/PortRef"
+        }
+      },
+      "required": [
+        "source",
+        "target"
+      ],
+      "title": "Edge",
+      "type": "object"
+    },
+    "EquityInput": {
+      "additionalProperties": false,
+      "description": "A succeeded run's backtest equity, as session returns: the change in equity as a fraction.",
+      "properties": {
+        "kind": {
+          "const": "equity",
+          "type": "string"
+        },
+        "run": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "run"
+      ],
+      "title": "EquityInput",
+      "type": "object"
+    },
+    "Experiment": {
+      "additionalProperties": false,
+      "description": "A search over the parameters of one strategy revision (Stage 4). Every trial is an ordinary run\nof that revision with one point of the search, cut off at the holdout start, so no trial reads\nholdout data. A grid tries every point; a random search draws `trials` distinct points with\n`seed`. Either way an experiment has at most 200 trials.",
+      "properties": {
+        "axes": {
+          "items": {
+            "$ref": "#/$defs/SearchAxis"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "direction": {
+          "enum": [
+            "maximize",
+            "minimize"
+          ],
+          "type": "string"
+        },
+        "exploratory": {
+          "default": false,
+          "description": "Exploratory analysis, which may read exploratory data (Phase 4B). Its ranking and holdout evaluations are labelled exploratory and never counted as verified. A verified experiment (the default) reading exploratory data is refused.",
+          "type": "boolean"
+        },
+        "holdout_start": {
+          "description": "Trials read only the sessions before this date; the holdout is every session from it.",
+          "format": "date",
+          "type": "string"
+        },
+        "kind": {
+          "const": "qrs/experiment",
+          "default": "qrs/experiment",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "objective": {
+          "description": "The backtest metric trials are ranked by.",
+          "enum": [
+            "sessions",
+            "initial_cash",
+            "final_equity",
+            "net_pnl",
+            "gross_pnl",
+            "commission",
+            "slippage",
+            "return_pct",
+            "max_drawdown",
+            "max_drawdown_pct",
+            "max_drawdown_sessions",
+            "exposure_pct",
+            "fills",
+            "round_trips",
+            "contracts_traded",
+            "final_position"
+          ],
+          "type": "string"
+        },
+        "revision": {
+          "description": "The base strategy revision.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "search": {
+          "enum": [
+            "grid",
+            "random"
+          ],
+          "type": "string"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Random search: the seed, kept with the experiment so its trials can be drawn again."
+        },
+        "strategy_id": {
+          "type": "string"
+        },
+        "trials": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Random search: how many distinct points to draw."
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "strategy_id",
+        "revision",
+        "search",
+        "axes",
+        "objective",
+        "direction",
+        "holdout_start"
+      ],
+      "title": "Experiment",
+      "type": "object"
+    },
+    "ExperimentInput": {
+      "additionalProperties": false,
+      "description": "A finished experiment: every trial's parameters and status, and the session returns of its\nsucceeded trials over their common window, as its ranking compares them, best first.",
+      "properties": {
+        "experiment": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "kind": {
+          "const": "experiment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "experiment"
+      ],
+      "title": "ExperimentInput",
+      "type": "object"
+    },
+    "Extraction": {
+      "additionalProperties": false,
+      "description": "How to turn a documents dataset into a feature dataset through a model's structured answers\n(Phase 4B). `qrs extract` replays it from stored responses; with --record it first asks the\nprovider for the missing ones, within the budget.",
+      "properties": {
+        "budget": {
+          "$ref": "#/$defs/Budget"
+        },
+        "capture": {
+          "description": "Change it to ask the provider again: the response store is keyed by it.",
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "dedupe": {
+          "default": false,
+          "description": "Drop later copies of identical text (whitespace aside), keeping the earliest publication.",
+          "type": "boolean"
+        },
+        "documents": {
+          "description": "The documents dataset ID.",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "endpoint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "A local provider's address, or the fixture's answers file; none for a hosted provider."
+        },
+        "fields": {
+          "items": {
+            "$ref": "#/$defs/OutputField"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "type": "array"
+        },
+        "instructions": {
+          "description": "The system text.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "kind": {
+          "const": "qrs/extraction",
+          "default": "qrs/extraction",
+          "type": "string"
+        },
+        "latency_seconds": {
+          "description": "Declared processing latency: a row is usable this long after its document at the earliest.",
+          "minimum": 0,
+          "type": "number"
+        },
+        "max_output_tokens": {
+          "description": "Including any thinking.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "model": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "description": "The feature dataset's name.",
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "options": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "description": "Decoding settings the provider accepts, sent as given.",
+          "type": "object"
+        },
+        "prompt": {
+          "description": "Sent for each document version, with {title} and {text} in place: no other placeholder.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "provider": {
+          "enum": [
+            "fixture",
+            "ollama",
+            "anthropic"
+          ],
+          "type": "string"
+        },
+        "redistributable": {
+          "description": "Whether exports may include the features and their responses; also needs the documents to be redistributable.",
+          "type": "boolean"
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "documents",
+        "provider",
+        "model",
+        "instructions",
+        "prompt",
+        "fields",
+        "max_output_tokens",
+        "latency_seconds",
+        "capture",
+        "budget",
+        "redistributable"
+      ],
+      "title": "Extraction",
+      "type": "object"
+    },
+    "FamilyBlock": {
+      "additionalProperties": false,
+      "description": "A family's hypotheses, evaluations, adjusted p-values and conclusions.",
+      "properties": {
+        "family": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "kind": {
+          "const": "family",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "family"
+      ],
+      "title": "FamilyBlock",
+      "type": "object"
+    },
+    "FamilyDocument": {
+      "additionalProperties": false,
+      "description": "Hypotheses registered together as one frozen unit (Stage 5): they are tested together and\ntheir p-values adjusted together. Confirmatory registration is refused if the test period of any\ndataset in the project's scope has been read (amendment A2).",
+      "properties": {
+        "alpha": {
+          "default": 0.05,
+          "description": "The family's significance level.",
+          "exclusiveMaximum": 1,
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "confirmatory": {
+          "type": "boolean"
+        },
+        "correction": {
+          "default": "holm",
+          "description": "Holm; Benjamini\u2013Hochberg; or Benjamini\u2013Yekutieli, where dependence may be negative.",
+          "enum": [
+            "holm",
+            "bh",
+            "by"
+          ],
+          "type": "string"
+        },
+        "hypotheses": {
+          "items": {
+            "$ref": "#/$defs/Hypothesis"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "qrs/family",
+          "default": "qrs/family",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "project": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "project",
+        "name",
+        "confirmatory",
+        "hypotheses"
+      ],
+      "title": "FamilyDocument",
+      "type": "object"
+    },
+    "FigureBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "analysis": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "kind": {
+          "const": "figure",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "analysis",
+        "name"
+      ],
+      "title": "FigureBlock",
+      "type": "object"
+    },
+    "Fill": {
+      "additionalProperties": false,
+      "description": "One executed order, as listed in a backtest's fills.",
+      "properties": {
+        "commission": {
+          "type": "number"
+        },
+        "price": {
+          "type": "number"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "session": {
+          "format": "date",
+          "type": "string"
+        },
+        "side": {
+          "enum": [
+            "BUY",
+            "SELL"
+          ],
+          "type": "string"
+        },
+        "slippage": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "session",
+        "side",
+        "quantity",
+        "price",
+        "commission",
+        "slippage"
+      ],
+      "title": "Fill",
+      "type": "object"
+    },
+    "FillsInput": {
+      "additionalProperties": false,
+      "description": "A succeeded run's backtest fills, as one value per session of its equity: the quantity bought\nless the quantity sold, or the commission or slippage paid; 0 on sessions without a fill.",
+      "properties": {
+        "column": {
+          "default": "quantity",
+          "enum": [
+            "quantity",
+            "commission",
+            "slippage"
+          ],
+          "type": "string"
+        },
+        "kind": {
+          "const": "fills",
+          "type": "string"
+        },
+        "run": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "run"
+      ],
+      "title": "FillsInput",
+      "type": "object"
+    },
+    "Hypothesis": {
+      "additionalProperties": false,
+      "description": "One registered hypothesis: its statement and the analysis that tests it, over the test period\nfrom the project's confirmation start (to its `until`, if any). It is supported only when its\nadjusted p-value is below the family's level with the estimate in the registered direction.",
+      "properties": {
+        "analysis": {
+          "$ref": "#/$defs/AnalysisDocument"
+        },
+        "direction": {
+          "enum": [
+            "greater",
+            "less",
+            "two_sided"
+          ],
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_]{0,39}$",
+          "type": "string"
+        },
+        "statement": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "statement",
+        "analysis",
+        "direction"
+      ],
+      "title": "Hypothesis",
+      "type": "object"
+    },
+    "ImportDeclaration": {
+      "additionalProperties": false,
+      "description": "What the user declares about a CSV file of daily bars before it is imported.",
+      "properties": {
+        "calendar": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The venue's exchange calendar, a pandas_market_calendars name such as CBOT_Agriculture; null expects every weekday."
+        },
+        "columns": {
+          "$ref": "#/$defs/ColumnMapping"
+        },
+        "date_format": {
+          "description": "strptime format of the date column, e.g. %Y-%m-%d.",
+          "pattern": "%",
+          "type": "string"
+        },
+        "evidence_class": {
+          "enum": [
+            "synthetic",
+            "exploratory",
+            "retrospective",
+            "point_in_time"
+          ],
+          "type": "string"
+        },
+        "instrument": {
+          "$ref": "#/$defs/Instrument"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "price_unit": {
+          "description": "currency: prices in the instrument's currency; cents: hundredths of it, divided by 100.",
+          "enum": [
+            "currency",
+            "cents"
+          ],
+          "type": "string"
+        },
+        "redistributable": {
+          "type": "boolean"
+        },
+        "source": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "columns",
+        "date_format",
+        "price_unit",
+        "calendar",
+        "instrument",
+        "evidence_class",
+        "source",
+        "redistributable"
+      ],
+      "title": "ImportDeclaration",
+      "type": "object"
+    },
+    "ImportReport": {
+      "additionalProperties": false,
+      "description": "How an imported dataset was read from its file, and the expected sessions the file lacks.",
+      "properties": {
+        "calendar": {
+          "description": "Where the expected sessions came from: an exchange calendar and its library version, or 'weekdays (approximate)'.",
+          "type": "string"
+        },
+        "columns": {
+          "$ref": "#/$defs/ColumnMapping"
+        },
+        "date_format": {
+          "type": "string"
+        },
+        "missing_sessions": {
+          "description": "Expected sessions between the first and last rows that the file lacks; reported, never filled.",
+          "items": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "price_unit": {
+          "enum": [
+            "currency",
+            "cents"
+          ],
+          "type": "string"
+        },
+        "source_sha256": {
+          "description": "SHA-256 of the imported file's bytes.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_sha256",
+        "columns",
+        "date_format",
+        "price_unit",
+        "calendar",
+        "missing_sessions"
+      ],
+      "title": "ImportReport",
+      "type": "object"
+    },
+    "Instrument": {
+      "additionalProperties": false,
+      "description": "One futures contract, or a continuous series of contracts (Stage 5). Prices are quoted in\n`currency` per unit of the underlying; one contract's value is price \u00d7 multiplier.",
+      "properties": {
+        "continuous": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ContinuousSeries"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Present only for a continuous series: how it was built from its contracts."
+        },
+        "currency": {
+          "pattern": "^[A-Z]{3}$",
+          "type": "string"
+        },
+        "expiry": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Last day the contract may be held; data must end before it. None only for a continuous series."
+        },
+        "margin_init": {
+          "description": "Initial margin as a fraction of notional value.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "margin_maint": {
+          "description": "Maintenance margin as a fraction of notional value.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "multiplier": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        "symbol": {
+          "pattern": "^[A-Z0-9]{1,16}$",
+          "type": "string"
+        },
+        "tick_size": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "symbol",
+        "currency",
+        "multiplier",
+        "tick_size",
+        "margin_init",
+        "margin_maint"
+      ],
+      "title": "Instrument",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "node": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "MethodInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "inputs": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "description": "Each input's name and the input kinds it accepts.",
+          "type": "object"
+        },
+        "outputs": {
+          "additionalProperties": {
+            "enum": [
+              "rows",
+              "aggregates"
+            ],
+            "type": "string"
+          },
+          "description": "Each table or figure, and whether it holds rows of its inputs or only aggregates.",
+          "type": "object"
+        },
+        "params_schema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "tests": {
+          "anyOf": [
+            {
+              "enum": [
+                "directional",
+                "joint"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "What it tests: a directional estimate, a joint restriction, or nothing."
+        },
+        "title": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "title",
+        "description",
+        "inputs",
+        "outputs",
+        "params_schema"
+      ],
+      "title": "MethodInfo",
+      "type": "object"
+    },
+    "ModelInput": {
+      "additionalProperties": false,
+      "description": "A term of the models a run's fit node fitted: a feature's coefficient (on the standardised\nfeature, as fitted) or the intercept, at the session at whose close each model was fitted.",
+      "properties": {
+        "kind": {
+          "const": "model",
+          "type": "string"
+        },
+        "node": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "run": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "term": {
+          "description": "A feature the model was fitted on, or 'intercept'.",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "run",
+        "node",
+        "term"
+      ],
+      "title": "ModelInput",
+      "type": "object"
+    },
+    "Node": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Unique in the strategy; also its variable name in generated Python.",
+          "pattern": "^[a-z][a-z0-9_]{0,39}$",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Namespaced operator ID, e.g. qrs.ema.",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": true,
+          "default": {},
+          "type": "object"
+        },
+        "version": {
+          "description": "Operator version; results depend on it.",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "operator",
+        "version"
+      ],
+      "title": "Node",
+      "type": "object"
+    },
+    "ObservationColumns": {
+      "additionalProperties": false,
+      "description": "The CSV header names holding each observation field (Stage 4).",
+      "properties": {
+        "estimated": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "An optional true/false column marking publication timestamps reconstructed after the fact."
+        },
+        "event": {
+          "description": "The date the value is about, such as the month a figure measures.",
+          "type": "string"
+        },
+        "published": {
+          "description": "When the value was published: ISO 8601 with an explicit UTC offset, e.g. 2024-11-26T16:30:00-05:00.",
+          "type": "string"
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "An optional label for each revision, such as 'second estimate'."
+        }
+      },
+      "required": [
+        "event",
+        "published"
+      ],
+      "title": "ObservationColumns",
+      "type": "object"
+    },
+    "ObservationsDeclaration": {
+      "additionalProperties": false,
+      "description": "What the user declares about a CSV file of observations before it is imported.",
+      "properties": {
+        "columns": {
+          "$ref": "#/$defs/ObservationColumns"
+        },
+        "estimates": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "How the estimated publication timestamps were made; required when any row is estimated."
+        },
+        "event_format": {
+          "description": "strptime format of the event column, e.g. %Y-%m-%d.",
+          "pattern": "%",
+          "type": "string"
+        },
+        "evidence_class": {
+          "description": "point_in_time requires every timestamp to be the one recorded at publication.",
+          "enum": [
+            "synthetic",
+            "exploratory",
+            "retrospective",
+            "point_in_time"
+          ],
+          "type": "string"
+        },
+        "kind": {
+          "const": "qrs/observations",
+          "description": "Tells an observations declaration from a bars one.",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "redistributable": {
+          "type": "boolean"
+        },
+        "source": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "values": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Each value column's header and its unit, e.g. {\"rate\": \"percent\"}.",
+          "minProperties": 1,
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "columns",
+        "event_format",
+        "values",
+        "evidence_class",
+        "source",
+        "redistributable"
+      ],
+      "title": "ObservationsDeclaration",
+      "type": "object"
+    },
+    "ObservationsInput": {
+      "additionalProperties": false,
+      "description": "An observations column, joined at each close of the `on` bars as the As-of operator joins it:\nthe latest event published by then, in its latest revision, if no older than max_age_days.",
+      "properties": {
+        "column": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "dataset": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "kind": {
+          "const": "observations",
+          "type": "string"
+        },
+        "max_age_days": {
+          "default": 31,
+          "maximum": 3660,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "on": {
+          "description": "The bars dataset whose sessions and closes the values are joined at.",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "dataset",
+        "column",
+        "on"
+      ],
+      "title": "ObservationsInput",
+      "type": "object"
+    },
+    "ObservationsManifest": {
+      "additionalProperties": false,
+      "description": "Describes an immutable observations dataset: values about event dates, each row with the\nmoment it was published. Its canonical JSON hash is the dataset ID, as for bars.",
+      "properties": {
+        "columns": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObservationColumns"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Present only on imported datasets."
+        },
+        "data_sha256": {
+          "type": "string"
+        },
+        "derivation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "How the dataset was extracted from documents; present only on feature datasets."
+        },
+        "estimated_rows": {
+          "type": "integer"
+        },
+        "estimates": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "How estimated publication timestamps were made; present only when some are."
+        },
+        "event_format": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Present only on imported datasets."
+        },
+        "evidence_class": {
+          "enum": [
+            "synthetic",
+            "exploratory",
+            "retrospective",
+            "point_in_time"
+          ],
+          "type": "string"
+        },
+        "kind": {
+          "const": "qrs/observations",
+          "default": "qrs/observations",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "redistributable": {
+          "type": "boolean"
+        },
+        "rows": {
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "SHA-256 of the imported file's bytes; present only on imported datasets."
+        },
+        "values": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Value columns and their units.",
+          "type": "object"
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "values",
+        "evidence_class",
+        "source",
+        "redistributable",
+        "rows",
+        "estimated_rows",
+        "data_sha256"
+      ],
+      "title": "ObservationsManifest",
+      "type": "object"
+    },
+    "OperatorInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "alignment": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "inputs": {
+          "items": {
+            "$ref": "#/$defs/PortInfo"
+          },
+          "type": "array"
+        },
+        "outputs": {
+          "items": {
+            "$ref": "#/$defs/PortInfo"
+          },
+          "type": "array"
+        },
+        "params_schema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "title": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "title",
+        "description",
+        "family",
+        "alignment",
+        "inputs",
+        "outputs",
+        "params_schema"
+      ],
+      "title": "OperatorInfo",
+      "type": "object"
+    },
+    "OutputField": {
+      "additionalProperties": false,
+      "description": "One number an extraction asks a model for, per document (Phase 4B).",
+      "properties": {
+        "description": {
+          "description": "What the number means, as the model is told it.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "maximum": {
+          "type": "number"
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "name": {
+          "description": "A lower-case identifier: the feature column's name.",
+          "maxLength": 64,
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "type": "string"
+        },
+        "unit": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "unit",
+        "minimum",
+        "maximum"
+      ],
+      "title": "OutputField",
+      "type": "object"
+    },
+    "PortInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "title": "PortInfo",
+      "type": "object"
+    },
+    "PortRef": {
+      "additionalProperties": false,
+      "properties": {
+        "node": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "node",
+        "port"
+      ],
+      "title": "PortRef",
+      "type": "object"
+    },
+    "Position": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "Position",
+      "type": "object"
+    },
+    "ProjectDocument": {
+      "additionalProperties": false,
+      "description": "A research project (Stage 5): a question, the datasets in its scope, and the confirmation\nstart, from which their sessions are the test period. Analyses in the project read only before\nit; only its families' evaluations read from it.",
+      "properties": {
+        "confirmation_start": {
+          "format": "date",
+          "type": "string"
+        },
+        "datasets": {
+          "description": "The datasets in scope: every dataset the project's families may evaluate.",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "qrs/project",
+          "default": "qrs/project",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "question": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "question",
+        "datasets",
+        "confirmation_start"
+      ],
+      "title": "ProjectDocument",
+      "type": "object"
+    },
+    "RecordInput": {
+      "additionalProperties": false,
+      "description": "A column of a table a succeeded run saved with a record node.",
+      "properties": {
+        "column": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "kind": {
+          "const": "record",
+          "type": "string"
+        },
+        "node": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "run": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "run",
+        "node",
+        "column"
+      ],
+      "title": "RecordInput",
+      "type": "object"
+    },
+    "ReportDocument": {
+      "additionalProperties": false,
+      "description": "A report (Stage 5): a project's findings, generated from stored artefacts, never written by\nhand. Building it fixes its evidence at a point in the store's history.",
+      "properties": {
+        "kind": {
+          "const": "qrs/report",
+          "default": "qrs/report",
+          "type": "string"
+        },
+        "project": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "sections": {
+          "items": {
+            "$ref": "#/$defs/ReportSection"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "title": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "project",
+        "title",
+        "sections"
+      ],
+      "title": "ReportDocument",
+      "type": "object"
+    },
+    "ReportSection": {
+      "additionalProperties": false,
+      "properties": {
+        "blocks": {
+          "default": [],
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "family": "#/$defs/FamilyBlock",
+                "figure": "#/$defs/FigureBlock",
+                "table": "#/$defs/TableBlock",
+                "text": "#/$defs/TextBlock",
+                "values": "#/$defs/ValuesBlock"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextBlock"
+              },
+              {
+                "$ref": "#/$defs/FigureBlock"
+              },
+              {
+                "$ref": "#/$defs/TableBlock"
+              },
+              {
+                "$ref": "#/$defs/ValuesBlock"
+              },
+              {
+                "$ref": "#/$defs/FamilyBlock"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "heading": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "heading"
+      ],
+      "title": "ReportSection",
+      "type": "object"
+    },
+    "RunInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "code_sha256": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "experiment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The experiment this run is a trial of, if any."
+        },
+        "finished_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "id": {
+          "type": "string"
+        },
+        "predecessor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The run this one re-ran, if any."
+        },
+        "result_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "revision": {
+          "type": "integer"
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "interrupted"
+          ],
+          "type": "string"
+        },
+        "strategy_id": {
+          "type": "string"
+        },
+        "trial": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Its trial number in that experiment."
+        }
+      },
+      "required": [
+        "id",
+        "strategy_id",
+        "revision",
+        "status",
+        "code_sha256",
+        "created_at"
+      ],
+      "title": "RunInfo",
+      "type": "object"
+    },
+    "SearchAxis": {
+      "additionalProperties": false,
+      "description": "One node parameter of the base strategy, and the values an experiment tries for it.",
+      "properties": {
+        "node": {
+          "type": "string"
+        },
+        "param": {
+          "type": "string"
+        },
+        "values": {
+          "items": {},
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "node",
+        "param",
+        "values"
+      ],
+      "title": "SearchAxis",
+      "type": "object"
+    },
+    "StrategyDocument": {
+      "additionalProperties": false,
+      "description": "A versioned strategy graph. Only nodes and edges affect execution; name, layout and template\nprovenance never reach the generated code, so they cannot change a result.",
+      "properties": {
+        "edges": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Edge"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "const": "qrs/strategy",
+          "default": "qrs/strategy",
+          "type": "string"
+        },
+        "layout": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Position"
+          },
+          "default": {},
+          "description": "Canvas positions by node ID (editor only).",
+          "type": "object"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "nodes": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Node"
+          },
+          "type": "array"
+        },
+        "template": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TemplateRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "StrategyDocument",
+      "type": "object"
+    },
+    "TableBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "analysis": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "kind": {
+          "const": "table",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "analysis",
+        "name"
+      ],
+      "title": "TableBlock",
+      "type": "object"
+    },
+    "Template": {
+      "additionalProperties": false,
+      "description": "A versioned starting strategy, stored as qrs/templates/<id>.json. Instantiating it copies the\nstrategy; parameter bounds come from the operators, so a template never restates them.",
+      "properties": {
+        "conditions": {
+          "description": "The market conditions the strategy is designed for and the assumptions its results rest on.",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "fixture": {
+          "$ref": "#/$defs/TemplateFixture"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "type": "string"
+        },
+        "required_bar": {
+          "const": "1D",
+          "description": "The kind of dataset the strategy needs: a dataset manifest's bar.",
+          "type": "string"
+        },
+        "strategy": {
+          "$ref": "#/$defs/StrategyDocument"
+        },
+        "title": {
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "title",
+        "description",
+        "required_bar",
+        "conditions",
+        "fixture",
+        "strategy"
+      ],
+      "title": "Template",
+      "type": "object"
+    },
+    "TemplateFixture": {
+      "additionalProperties": false,
+      "description": "Bars to check a template on, stored next to it as <template id>.csv, and the fills they give.\nA template that reads features also has documents, <template id>.documents.csv, and the\nextraction that turns them into features, replayed from <template id>.responses.jsonl (Phase 4B).",
+      "properties": {
+        "declaration": {
+          "$ref": "#/$defs/ImportDeclaration"
+        },
+        "documents": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentsDeclaration"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "extraction": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Extraction"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fills": {
+          "items": {
+            "$ref": "#/$defs/Fill"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "declaration",
+        "fills"
+      ],
+      "title": "TemplateFixture",
+      "type": "object"
+    },
+    "TemplateRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ],
+      "title": "TemplateRef",
+      "type": "object"
+    },
+    "TextBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "text",
+          "type": "string"
+        },
+        "text": {
+          "description": "Plain paragraphs, separated by blank lines; shown as text, never as markup.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "text"
+      ],
+      "title": "TextBlock",
+      "type": "object"
+    },
+    "TrialInput": {
+      "additionalProperties": false,
+      "description": "A symbolic reference, only in a hypothesis's specification: the equity of an experiment's\ntrial at `rank` in its ranking, from its holdout evaluation. It is resolved when the hypothesis\nis evaluated: the holdout evaluation is queued then, and read as an equity input.",
+      "properties": {
+        "experiment": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "kind": {
+          "const": "trial",
+          "type": "string"
+        },
+        "rank": {
+          "default": 1,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "experiment"
+      ],
+      "title": "TrialInput",
+      "type": "object"
+    },
+    "ValuesBlock": {
+      "additionalProperties": false,
+      "description": "An analysis's result: its values, warnings and assumptions.",
+      "properties": {
+        "analysis": {
+          "pattern": "^[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "kind": {
+          "const": "values",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "analysis"
+      ],
+      "title": "ValuesBlock",
+      "type": "object"
+    }
+  },
+  "title": "Quant Research Studio contracts"
+}

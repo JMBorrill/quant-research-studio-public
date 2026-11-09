@@ -1,0 +1,27 @@
+{
+  "project": "${project}",
+  "name": "B: trend following",
+  "confirmatory": true,
+  "alpha": 0.05,
+  "correction": "holm",
+  "hypotheses": [
+    {
+      "id": "trend",
+      "statement": "The top-ranked trial of the trend-following search keeps a positive return after the confirmation start.",
+      "direction": "greater",
+      "analysis": {
+        "name": "trend",
+        "method": "qrs.mean_test",
+        "method_version": 1,
+        "inputs": {
+          "values": {
+            "kind": "trial",
+            "experiment": "${experiment}",
+            "rank": 1
+          }
+        },
+        "params": {}
+      }
+    }
+  ]
+}

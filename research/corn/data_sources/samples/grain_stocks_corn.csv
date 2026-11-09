@@ -1,0 +1,7 @@
+as_of,release_date,on_farm_thousand_bushels,off_farm_thousand_bushels,total_thousand_bushels,scheduled_at,clock_status,source_asset
+2020-03-01,2021-09-30,4454000,3497576,7951576,2021-09-30T12:00:00-04:00,historical_calendar_time_not_delivery_log,grst0921.txt
+2021-03-01,2021-09-30,4036500,3659648,7696148,2021-09-30T12:00:00-04:00,historical_calendar_time_not_delivery_log,grst0921.txt
+2020-06-01,2021-09-30,2867000,2135987,5002987,2021-09-30T12:00:00-04:00,historical_calendar_time_not_delivery_log,grst0921.txt
+2021-06-01,2021-09-30,1743600,2366140,4109740,2021-09-30T12:00:00-04:00,historical_calendar_time_not_delivery_log,grst0921.txt
+2020-09-01,2021-09-30,750800,1168662,1919462,2021-09-30T12:00:00-04:00,historical_calendar_time_not_delivery_log,grst0921.txt
+2021-09-01,2021-09-30,394900,841581,1236481,2021-09-30T12:00:00-04:00,historical_calendar_time_not_delivery_log,grst0921.txt

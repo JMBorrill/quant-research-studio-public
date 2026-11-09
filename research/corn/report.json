@@ -1,0 +1,80 @@
+{
+  "project": "${project}",
+  "title": "Corn futures research programme",
+  "sections": [
+    {
+      "heading": "Data",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "Continuous front-contract prices are back-adjusted by differences and are research data, not prices anyone could trade at: the strategy trades the December 2024 contract itself. Release times come from the agencies' archives of actual release dates, including those delayed by government shutdowns."
+        },
+        {
+          "kind": "values",
+          "analysis": "${analysis:coverage_continuous}"
+        },
+        {
+          "kind": "values",
+          "analysis": "${analysis:coverage_reports}"
+        }
+      ]
+    },
+    {
+      "heading": "Before the confirmation start",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "Exploration up to 3 January 2022, counted and disclosed. The report tone is extracted by a model and so is exploratory evidence."
+        },
+        {
+          "kind": "figure",
+          "analysis": "${analysis:seasonal_profile}",
+          "name": "profile"
+        },
+        {
+          "kind": "values",
+          "analysis": "${analysis:report_sessions}"
+        },
+        {
+          "kind": "values",
+          "analysis": "${analysis:crop_condition}"
+        },
+        {
+          "kind": "values",
+          "analysis": "${analysis:report_tone}"
+        }
+      ]
+    },
+    {
+      "heading": "The strategy search",
+      "blocks": [
+        {
+          "kind": "figure",
+          "analysis": "${analysis:search_surface}",
+          "name": "figure"
+        },
+        {
+          "kind": "values",
+          "analysis": "${analysis:search_deflated}"
+        },
+        {
+          "kind": "values",
+          "analysis": "${analysis:search_reality}"
+        }
+      ]
+    },
+    {
+      "heading": "Confirmatory families",
+      "blocks": [
+        {
+          "kind": "family",
+          "family": "${family:market}"
+        },
+        {
+          "kind": "family",
+          "family": "${family:strategy}"
+        }
+      ]
+    }
+  ]
+}

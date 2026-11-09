@@ -1,0 +1,28 @@
+{
+  "name": "Trend following on the December 2024 contract",
+  "strategy_id": "${strategy}",
+  "revision": 1,
+  "search": "grid",
+  "axes": [
+    {
+      "node": "fast",
+      "param": "period",
+      "values": [
+        5,
+        10,
+        20
+      ]
+    },
+    {
+      "node": "slow",
+      "param": "period",
+      "values": [
+        30,
+        50
+      ]
+    }
+  ],
+  "objective": "net_pnl",
+  "direction": "maximize",
+  "holdout_start": "2022-01-03"
+}

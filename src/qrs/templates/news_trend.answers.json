@@ -1,0 +1,21 @@
+{
+  "148bc3b1bc4fc9812158b5fd6d8456fd90b97536142f906aaa62add174b162a9": {
+    "finish": "refused",
+    "text": ""
+  },
+  "333c5bac43a305b0677ce0858c1592abef4487ea91d726b796f20e62b0cd58a7": "{\"sentiment\": 0.6}",
+  "446aeede8b80be40baf853de8850c00e4c39082a06eb2ce94b7952342ec3cd89": "{\"sentiment\": 0.7}",
+  "4ba377b3b1860f4aab3214de5f7ad548cebe0c31b25bb093575c6975396f5672": "{\"sentiment\": 0.9}",
+  "4bb85b5b50f17e3d19fcd15391e597986906bffa0933c713a85b1b435cc1fa53": "{\"sentiment\": 0.5}",
+  "72ea7c4359c1cab8507a6ab747e1f7da05a8dee8cc9b40de08d74a9bec7d22b8": "{\"sentiment\": 0.6}",
+  "93394006beaaea495dba44336553de9cb5be8be6c4b2e20311b7c1ce4e8d8929": "{\"sentiment\": 0.2}",
+  "a3104f2e9fa0623133bba357a51bc1a5c8cca3836709a52bca305b18e6241576": "{\"sentiment\": -0.4}",
+  "a8f4891a9c73e961c205924fc2837d0c0fae241d381878af1a5e7f7afcfa7ca1": "{\"sentiment\": -0.2}",
+  "b114f058c38e325b15e446c7bf73b0ca3631ab5db023893d6207ef02307a8572": "{\"sentiment\": 0.5}",
+  "b6e4e5e9f75c527dff9d5d59a257df62411add34c22a498c9179e57e1e9cf9cf": "{\"sentiment\": 0.3}",
+  "b8d8d66df69a39f3d372bcb5753c2efd7be1c0cd06c6ca94a71fe934fcfe36cf": "Positive, mostly.",
+  "bf36703d15cdf76a1a2bb159e139afe77b7b4d2e905e90eabf982236228e7028": "{\"sentiment\": 0.3}",
+  "c3aaf3427055eab656088dd48e759f0ae2fadb27881d51e1983ddd240284f08b": "{\"sentiment\": -0.8}",
+  "d5debbf7349a944445dcdbcee9a3c3c77d5af3b058da4174d668e1112b72e65a": "{\"sentiment\": -0.3}",
+  "da0e52ac304a7d9f163d8813f46835feb5d43155106ca18723b6ae3699b065fe": "{\"sentiment\": 0.4}"
+}

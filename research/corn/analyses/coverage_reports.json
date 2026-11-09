@@ -1,0 +1,16 @@
+{
+  "name": "Coverage reports",
+  "method": "qrs.coverage",
+  "method_version": 1,
+  "inputs": {
+    "data": {
+      "kind": "observations",
+      "dataset": "${wasde}",
+      "column": "EndingStocks",
+      "on": "${continuous}",
+      "max_age_days": 31
+    }
+  },
+  "params": {},
+  "project": "${project}"
+}

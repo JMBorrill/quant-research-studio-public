@@ -1,0 +1,16 @@
+{
+  "name": "Search reality",
+  "method": "qrs.reality_check",
+  "method_version": 1,
+  "inputs": {
+    "trials": {
+      "kind": "experiment",
+      "experiment": "${experiment}"
+    }
+  },
+  "params": {
+    "replicates": 500,
+    "seed": 1
+  },
+  "project": "${project}"
+}

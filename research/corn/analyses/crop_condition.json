@@ -1,0 +1,23 @@
+{
+  "name": "Crop condition",
+  "method": "qrs.feature_return",
+  "method_version": 1,
+  "inputs": {
+    "feature": {
+      "kind": "observations",
+      "dataset": "${crop_progress}",
+      "column": "Condition",
+      "on": "${continuous}",
+      "max_age_days": 10
+    },
+    "returns": {
+      "kind": "bars",
+      "dataset": "${continuous}",
+      "measure": "price_change"
+    }
+  },
+  "params": {
+    "horizon": 5
+  },
+  "project": "${project}"
+}

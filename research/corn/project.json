@@ -1,0 +1,12 @@
+{
+  "name": "Corn futures: seasonality, reports and positioning",
+  "question": "Do corn futures returns vary by calendar month, move more on supply and use reports, follow the weekly change in crop condition, or differ after extreme speculative positioning; and does a trend-following rule chosen before 2022 keep a positive return after it?",
+  "datasets": [
+    "${continuous}",
+    "${contract}",
+    "${crop_progress}",
+    "${wasde}",
+    "${cot}"
+  ],
+  "confirmation_start": "2022-01-03"
+}

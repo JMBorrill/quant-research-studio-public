@@ -1,0 +1,51 @@
+[project]
+name = "qrs"
+version = "0.1.0"
+description = "Quant Research Studio: visual strategy graphs compiled to reproducible Python backtests."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "nautilus_trader==1.230.0",
+    "numpy>=2.2",
+    "pandas>=2.3",
+    "pandas_market_calendars>=5.5",
+    "pyarrow>=21",
+    "pydantic>=2.11",
+    "fastapi>=0.115",
+    "uvicorn>=0.34",
+]
+
+[project.optional-dependencies]
+# Only recording through the hosted Anthropic adapter needs this; runs, replay and exports never do,
+# so runtime.lock leaves it out.
+hosted = ["anthropic>=2.3,<3"]
+# Statistical inference in analyses (Stage 5 amendment A1). Strategy runs and exported bundles never
+# import it, so runtime.lock leaves it out.
+research = ["scipy>=1.14"]
+
+[project.scripts]
+qrs = "qrs.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8.3", "httpx>=0.28", "playwright==1.63.0", "qrs[hosted,research]"]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Browser tests need the built studio and Chromium; CI runs them in their own job with -m e2e.
+addopts = "-m 'not e2e'"
+markers = ["e2e: the built studio in a real browser (uv run pytest -m e2e)"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::FutureWarning", "ignore:Using `httpx` with `starlette.testclient`"]
+
+[tool.ruff]
+line-length = 160
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["qrs", "conftest", "fixture_ops", "qrs_roc"]

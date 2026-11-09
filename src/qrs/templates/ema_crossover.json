@@ -1,0 +1,256 @@
+{
+  "id": "ema_crossover",
+  "version": 2,
+  "title": "EMA crossover",
+  "description": "Long one contract when EMA 20 crosses above EMA 50; flat when it crosses below. Fills at the next session's open with commission and slippage.",
+  "required_bar": "1D",
+  "conditions": [
+    "Trending markets: a trend must outlast the lag of the 20- and 50-session exponential averages; sideways markets cause repeated losing trades.",
+    "Long or flat only; it never sells short.",
+    "Daily bars. Signals are decided at the close and filled at the next session's open, with the backtest's commission and slippage."
+  ],
+  "fixture": {
+    "declaration": {
+      "name": "EMA crossover template fixture",
+      "columns": {
+        "date": "Date",
+        "open": "Open",
+        "high": "High",
+        "low": "Low",
+        "close": "Close"
+      },
+      "date_format": "%Y-%m-%d",
+      "price_unit": "currency",
+      "calendar": null,
+      "instrument": {
+        "symbol": "FIX",
+        "currency": "USD",
+        "multiplier": 50,
+        "tick_size": 0.25,
+        "margin_init": 0.1,
+        "margin_maint": 0.05,
+        "expiry": "2030-12-31"
+      },
+      "evidence_class": "synthetic",
+      "source": "qrs/templates/ema_crossover.csv: a constructed price path whose signals are worked out in tests/test_templates.py",
+      "redistributable": true
+    },
+    "fills": [
+      {
+        "session": "2026-04-13",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 119.5,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-06-09",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 116.25,
+        "commission": 2.5,
+        "slippage": 12.5
+      }
+    ]
+  },
+  "strategy": {
+    "kind": "qrs/strategy",
+    "version": 1,
+    "name": "EMA crossover",
+    "nodes": [
+      {
+        "id": "bars",
+        "operator": "qrs.dataset",
+        "version": 1,
+        "params": {
+          "dataset_id": ""
+        }
+      },
+      {
+        "id": "fast",
+        "operator": "qrs.ema",
+        "version": 1,
+        "params": {
+          "period": 20,
+          "column": "close"
+        }
+      },
+      {
+        "id": "slow",
+        "operator": "qrs.ema",
+        "version": 1,
+        "params": {
+          "period": 50,
+          "column": "close"
+        }
+      },
+      {
+        "id": "cross_up",
+        "operator": "qrs.cross",
+        "version": 1,
+        "params": {
+          "direction": "above"
+        }
+      },
+      {
+        "id": "cross_down",
+        "operator": "qrs.cross",
+        "version": 1,
+        "params": {
+          "direction": "below"
+        }
+      },
+      {
+        "id": "position",
+        "operator": "qrs.long_flat",
+        "version": 1,
+        "params": {
+          "quantity": 1
+        }
+      },
+      {
+        "id": "backtest",
+        "operator": "qrs.backtest",
+        "version": 1,
+        "params": {
+          "initial_cash": 100000,
+          "commission_per_contract": 2.5,
+          "slippage_ticks": 1
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "fast",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "slow",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "fast",
+          "port": "series"
+        },
+        "target": {
+          "node": "cross_up",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "slow",
+          "port": "series"
+        },
+        "target": {
+          "node": "cross_up",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "fast",
+          "port": "series"
+        },
+        "target": {
+          "node": "cross_down",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "slow",
+          "port": "series"
+        },
+        "target": {
+          "node": "cross_down",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "cross_up",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "entry"
+        }
+      },
+      {
+        "source": {
+          "node": "cross_down",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "exit"
+        }
+      },
+      {
+        "source": {
+          "node": "position",
+          "port": "positions"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "positions"
+        }
+      }
+    ],
+    "layout": {
+      "bars": {
+        "x": 0,
+        "y": 160
+      },
+      "fast": {
+        "x": 280,
+        "y": 40
+      },
+      "slow": {
+        "x": 280,
+        "y": 280
+      },
+      "cross_up": {
+        "x": 560,
+        "y": 40
+      },
+      "cross_down": {
+        "x": 560,
+        "y": 280
+      },
+      "position": {
+        "x": 840,
+        "y": 160
+      },
+      "backtest": {
+        "x": 1120,
+        "y": 160
+      }
+    }
+  }
+}

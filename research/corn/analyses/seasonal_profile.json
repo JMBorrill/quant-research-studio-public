@@ -1,0 +1,14 @@
+{
+  "name": "Seasonal profile",
+  "method": "qrs.seasonal",
+  "method_version": 1,
+  "inputs": {
+    "returns": {
+      "kind": "bars",
+      "dataset": "${continuous}",
+      "measure": "price_change"
+    }
+  },
+  "params": {},
+  "project": "${project}"
+}

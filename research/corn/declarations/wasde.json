@@ -1,0 +1,15 @@
+{
+  "kind": "qrs/observations",
+  "name": "Ending stocks, monthly supply and use (synthetic)",
+  "columns": {
+    "event": "Month",
+    "published": "Published"
+  },
+  "event_format": "%Y-%m",
+  "values": {
+    "EndingStocks": "million bushels"
+  },
+  "evidence_class": "synthetic",
+  "source": "research/corn/fixtures/generate.py",
+  "redistributable": true
+}

@@ -1,0 +1,13 @@
+{
+  "url": "https://www.turtletrader.com/cddata/c.zip",
+  "method": "HEAD",
+  "attempted_at": "2026-11-04T16:10:16.117774+00:00",
+  "price_body_requested": false,
+  "status": 403,
+  "headers": {
+    "Content-Type": "text/plain; charset=UTF-8",
+    "Content-Length": "17",
+    "Last-Modified": null
+  },
+  "acquisition_approved": false
+}

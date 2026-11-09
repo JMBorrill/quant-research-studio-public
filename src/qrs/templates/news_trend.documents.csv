@@ -1,0 +1,18 @@
+Id,Published,Version,Headline,Body,Link
+N1,2023-10-19T14:00:00-04:00,first,Orders beat forecasts,"Factory orders rose more than forecast in September, led by machinery.",https://example.com/news/n1-first
+N2,2023-11-09T10:00:00-05:00,first,Inventories build,Wholesale inventories rose for a third month.,https://example.com/news/n2-first
+C,2023-12-06T09:00:00-05:00,first,Shipping rates ease,Freight rates fell for a second week as port congestion cleared.,https://example.com/news/c-first
+C-wire,2023-12-06T13:00:00-05:00,first,Freight rates fall again,"Freight rates fell for a second week as  port congestion
+cleared.",https://example.com/news/c-wire-first
+B,2023-12-07T10:00:00-05:00,first,Exporter raises outlook,The exporter raised its full-year outlook on strong demand.,https://example.com/news/b-first
+B,2023-12-08T11:00:00-05:00,corrected,Exporter cuts outlook,"Correction: the exporter cut, not raised, its full-year outlook, on weak demand.",https://example.com/news/b-corrected
+E,2024-01-29T09:00:00-05:00,first,Retail sales steady,Retail sales were unchanged in January.,https://example.com/news/e-first
+D,2024-02-02T16:30:00-05:00,first,Contract win after the bell,"The company won a large contract, announced after the market closed.",https://example.com/news/d-first
+F,2024-03-18T08:00:00-04:00,first,Analysts upgrade the sector,Analysts upgraded the sector to overweight.,https://example.com/news/f-first
+G,2024-06-27T08:00:00-04:00,first,Demand outlook improves,Survey respondents expect demand to improve next quarter.,https://example.com/news/g-first
+H,2024-06-28T09:00:00-04:00,first,Mixed signals,Some indicators rose and others fell.,https://example.com/news/h-first
+I,2024-07-23T09:00:00-04:00,first,Guidance cut,The company cut guidance for the second half.,https://example.com/news/i-first
+K,2024-08-14T09:00:00-04:00,first,Costs rise,Input costs rose faster than expected.,https://example.com/news/k-first
+J,2024-08-15T09:00:00-04:00,first,Record quarter,Quarterly revenue reached a record.,https://example.com/news/j-first
+L,2024-09-30T15:55:00-04:00,first,Rate cut expected,Traders now expect a rate cut at the next meeting.,https://example.com/news/l-first
+M,2024-10-02T09:00:00-04:00,first,Lawsuit filed,A lawsuit was filed over the merger.,https://example.com/news/m-first

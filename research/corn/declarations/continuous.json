@@ -1,0 +1,702 @@
+{
+  "columns": {
+    "date": "Date",
+    "open": "Open",
+    "high": "High",
+    "low": "Low",
+    "close": "Close"
+  },
+  "date_format": "%Y-%m-%d",
+  "price_unit": "cents",
+  "calendar": "CBOT_Agriculture",
+  "evidence_class": "synthetic",
+  "redistributable": true,
+  "name": "Corn, continuous front contract (synthetic)",
+  "instrument": {
+    "symbol": "ZC",
+    "currency": "USD",
+    "multiplier": 5000,
+    "tick_size": 0.0025,
+    "margin_init": 0.06,
+    "margin_maint": 0.05,
+    "continuous": {
+      "roll_rule": "Front contract, rolled to the next on its last trading day (the last session before the 15th of its month).",
+      "adjustment": "difference",
+      "contracts": [
+        {
+          "symbol": "ZCH06",
+          "expiry": "2006-03-14",
+          "first_session": "2006-01-03",
+          "last_session": "2006-03-13",
+          "adjustment": 0.15
+        },
+        {
+          "symbol": "ZCK06",
+          "expiry": "2006-05-12",
+          "first_session": "2006-03-14",
+          "last_session": "2006-05-11",
+          "adjustment": 0.105
+        },
+        {
+          "symbol": "ZCN06",
+          "expiry": "2006-07-14",
+          "first_session": "2006-05-12",
+          "last_session": "2006-07-13",
+          "adjustment": 0.06
+        },
+        {
+          "symbol": "ZCU06",
+          "expiry": "2006-09-14",
+          "first_session": "2006-07-14",
+          "last_session": "2006-09-13",
+          "adjustment": 0.325
+        },
+        {
+          "symbol": "ZCZ06",
+          "expiry": "2006-12-14",
+          "first_session": "2006-09-14",
+          "last_session": "2006-12-13",
+          "adjustment": 0.275
+        },
+        {
+          "symbol": "ZCH07",
+          "expiry": "2007-03-14",
+          "first_session": "2006-12-14",
+          "last_session": "2007-03-13",
+          "adjustment": 0.1375
+        },
+        {
+          "symbol": "ZCK07",
+          "expiry": "2007-05-14",
+          "first_session": "2007-03-14",
+          "last_session": "2007-05-11",
+          "adjustment": 0.0975
+        },
+        {
+          "symbol": "ZCN07",
+          "expiry": "2007-07-13",
+          "first_session": "2007-05-14",
+          "last_session": "2007-07-12",
+          "adjustment": 0.05
+        },
+        {
+          "symbol": "ZCU07",
+          "expiry": "2007-09-14",
+          "first_session": "2007-07-13",
+          "last_session": "2007-09-13",
+          "adjustment": 0.3175
+        },
+        {
+          "symbol": "ZCZ07",
+          "expiry": "2007-12-14",
+          "first_session": "2007-09-14",
+          "last_session": "2007-12-13",
+          "adjustment": 0.2725
+        },
+        {
+          "symbol": "ZCH08",
+          "expiry": "2008-03-14",
+          "first_session": "2007-12-14",
+          "last_session": "2008-03-13",
+          "adjustment": 0.1375
+        },
+        {
+          "symbol": "ZCK08",
+          "expiry": "2008-05-14",
+          "first_session": "2008-03-14",
+          "last_session": "2008-05-13",
+          "adjustment": 0.09
+        },
+        {
+          "symbol": "ZCN08",
+          "expiry": "2008-07-14",
+          "first_session": "2008-05-14",
+          "last_session": "2008-07-11",
+          "adjustment": 0.045
+        },
+        {
+          "symbol": "ZCU08",
+          "expiry": "2008-09-12",
+          "first_session": "2008-07-14",
+          "last_session": "2008-09-11",
+          "adjustment": 0.31
+        },
+        {
+          "symbol": "ZCZ08",
+          "expiry": "2008-12-12",
+          "first_session": "2008-09-12",
+          "last_session": "2008-12-11",
+          "adjustment": 0.2675
+        },
+        {
+          "symbol": "ZCH09",
+          "expiry": "2009-03-13",
+          "first_session": "2008-12-12",
+          "last_session": "2009-03-12",
+          "adjustment": 0.1275
+        },
+        {
+          "symbol": "ZCK09",
+          "expiry": "2009-05-14",
+          "first_session": "2009-03-13",
+          "last_session": "2009-05-13",
+          "adjustment": 0.0775
+        },
+        {
+          "symbol": "ZCN09",
+          "expiry": "2009-07-14",
+          "first_session": "2009-05-14",
+          "last_session": "2009-07-13",
+          "adjustment": 0.03
+        },
+        {
+          "symbol": "ZCU09",
+          "expiry": "2009-09-14",
+          "first_session": "2009-07-14",
+          "last_session": "2009-09-11",
+          "adjustment": 0.3175
+        },
+        {
+          "symbol": "ZCZ09",
+          "expiry": "2009-12-14",
+          "first_session": "2009-09-14",
+          "last_session": "2009-12-11",
+          "adjustment": 0.27
+        },
+        {
+          "symbol": "ZCH10",
+          "expiry": "2010-03-12",
+          "first_session": "2009-12-14",
+          "last_session": "2010-03-11",
+          "adjustment": 0.135
+        },
+        {
+          "symbol": "ZCK10",
+          "expiry": "2010-05-14",
+          "first_session": "2010-03-12",
+          "last_session": "2010-05-13",
+          "adjustment": 0.0925
+        },
+        {
+          "symbol": "ZCN10",
+          "expiry": "2010-07-14",
+          "first_session": "2010-05-14",
+          "last_session": "2010-07-13",
+          "adjustment": 0.05
+        },
+        {
+          "symbol": "ZCU10",
+          "expiry": "2010-09-14",
+          "first_session": "2010-07-14",
+          "last_session": "2010-09-13",
+          "adjustment": 0.2975
+        },
+        {
+          "symbol": "ZCZ10",
+          "expiry": "2010-12-14",
+          "first_session": "2010-09-14",
+          "last_session": "2010-12-13",
+          "adjustment": 0.2525
+        },
+        {
+          "symbol": "ZCH11",
+          "expiry": "2011-03-14",
+          "first_session": "2010-12-14",
+          "last_session": "2011-03-11",
+          "adjustment": 0.1125
+        },
+        {
+          "symbol": "ZCK11",
+          "expiry": "2011-05-13",
+          "first_session": "2011-03-14",
+          "last_session": "2011-05-12",
+          "adjustment": 0.0625
+        },
+        {
+          "symbol": "ZCN11",
+          "expiry": "2011-07-14",
+          "first_session": "2011-05-13",
+          "last_session": "2011-07-13",
+          "adjustment": 0.0175
+        },
+        {
+          "symbol": "ZCU11",
+          "expiry": "2011-09-14",
+          "first_session": "2011-07-14",
+          "last_session": "2011-09-13",
+          "adjustment": 0.29
+        },
+        {
+          "symbol": "ZCZ11",
+          "expiry": "2011-12-14",
+          "first_session": "2011-09-14",
+          "last_session": "2011-12-13",
+          "adjustment": 0.2475
+        },
+        {
+          "symbol": "ZCH12",
+          "expiry": "2012-03-14",
+          "first_session": "2011-12-14",
+          "last_session": "2012-03-13",
+          "adjustment": 0.125
+        },
+        {
+          "symbol": "ZCK12",
+          "expiry": "2012-05-14",
+          "first_session": "2012-03-14",
+          "last_session": "2012-05-11",
+          "adjustment": 0.08
+        },
+        {
+          "symbol": "ZCN12",
+          "expiry": "2012-07-13",
+          "first_session": "2012-05-14",
+          "last_session": "2012-07-12",
+          "adjustment": 0.0425
+        },
+        {
+          "symbol": "ZCU12",
+          "expiry": "2012-09-14",
+          "first_session": "2012-07-13",
+          "last_session": "2012-09-13",
+          "adjustment": 0.275
+        },
+        {
+          "symbol": "ZCZ12",
+          "expiry": "2012-12-14",
+          "first_session": "2012-09-14",
+          "last_session": "2012-12-13",
+          "adjustment": 0.23
+        },
+        {
+          "symbol": "ZCH13",
+          "expiry": "2013-03-14",
+          "first_session": "2012-12-14",
+          "last_session": "2013-03-13",
+          "adjustment": 0.0875
+        },
+        {
+          "symbol": "ZCK13",
+          "expiry": "2013-05-14",
+          "first_session": "2013-03-14",
+          "last_session": "2013-05-13",
+          "adjustment": 0.0425
+        },
+        {
+          "symbol": "ZCN13",
+          "expiry": "2013-07-12",
+          "first_session": "2013-05-14",
+          "last_session": "2013-07-11",
+          "adjustment": 0.0
+        },
+        {
+          "symbol": "ZCU13",
+          "expiry": "2013-09-13",
+          "first_session": "2013-07-12",
+          "last_session": "2013-09-12",
+          "adjustment": 0.255
+        },
+        {
+          "symbol": "ZCZ13",
+          "expiry": "2013-12-13",
+          "first_session": "2013-09-13",
+          "last_session": "2013-12-12",
+          "adjustment": 0.2075
+        },
+        {
+          "symbol": "ZCH14",
+          "expiry": "2014-03-14",
+          "first_session": "2013-12-13",
+          "last_session": "2014-03-13",
+          "adjustment": 0.08
+        },
+        {
+          "symbol": "ZCK14",
+          "expiry": "2014-05-14",
+          "first_session": "2014-03-14",
+          "last_session": "2014-05-13",
+          "adjustment": 0.04
+        },
+        {
+          "symbol": "ZCN14",
+          "expiry": "2014-07-14",
+          "first_session": "2014-05-14",
+          "last_session": "2014-07-11",
+          "adjustment": -0.0075
+        },
+        {
+          "symbol": "ZCU14",
+          "expiry": "2014-09-12",
+          "first_session": "2014-07-14",
+          "last_session": "2014-09-11",
+          "adjustment": 0.2875
+        },
+        {
+          "symbol": "ZCZ14",
+          "expiry": "2014-12-12",
+          "first_session": "2014-09-12",
+          "last_session": "2014-12-11",
+          "adjustment": 0.2475
+        },
+        {
+          "symbol": "ZCH15",
+          "expiry": "2015-03-13",
+          "first_session": "2014-12-12",
+          "last_session": "2015-03-12",
+          "adjustment": 0.1225
+        },
+        {
+          "symbol": "ZCK15",
+          "expiry": "2015-05-14",
+          "first_session": "2015-03-13",
+          "last_session": "2015-05-13",
+          "adjustment": 0.0775
+        },
+        {
+          "symbol": "ZCN15",
+          "expiry": "2015-07-14",
+          "first_session": "2015-05-14",
+          "last_session": "2015-07-13",
+          "adjustment": 0.035
+        },
+        {
+          "symbol": "ZCU15",
+          "expiry": "2015-09-14",
+          "first_session": "2015-07-14",
+          "last_session": "2015-09-11",
+          "adjustment": 0.2825
+        },
+        {
+          "symbol": "ZCZ15",
+          "expiry": "2015-12-14",
+          "first_session": "2015-09-14",
+          "last_session": "2015-12-11",
+          "adjustment": 0.2425
+        },
+        {
+          "symbol": "ZCH16",
+          "expiry": "2016-03-14",
+          "first_session": "2015-12-14",
+          "last_session": "2016-03-11",
+          "adjustment": 0.1075
+        },
+        {
+          "symbol": "ZCK16",
+          "expiry": "2016-05-13",
+          "first_session": "2016-03-14",
+          "last_session": "2016-05-12",
+          "adjustment": 0.0625
+        },
+        {
+          "symbol": "ZCN16",
+          "expiry": "2016-07-14",
+          "first_session": "2016-05-13",
+          "last_session": "2016-07-13",
+          "adjustment": 0.0125
+        },
+        {
+          "symbol": "ZCU16",
+          "expiry": "2016-09-14",
+          "first_session": "2016-07-14",
+          "last_session": "2016-09-13",
+          "adjustment": 0.265
+        },
+        {
+          "symbol": "ZCZ16",
+          "expiry": "2016-12-14",
+          "first_session": "2016-09-14",
+          "last_session": "2016-12-13",
+          "adjustment": 0.2225
+        },
+        {
+          "symbol": "ZCH17",
+          "expiry": "2017-03-14",
+          "first_session": "2016-12-14",
+          "last_session": "2017-03-13",
+          "adjustment": 0.0875
+        },
+        {
+          "symbol": "ZCK17",
+          "expiry": "2017-05-12",
+          "first_session": "2017-03-14",
+          "last_session": "2017-05-11",
+          "adjustment": 0.0425
+        },
+        {
+          "symbol": "ZCN17",
+          "expiry": "2017-07-14",
+          "first_session": "2017-05-12",
+          "last_session": "2017-07-13",
+          "adjustment": 0.0
+        },
+        {
+          "symbol": "ZCU17",
+          "expiry": "2017-09-14",
+          "first_session": "2017-07-14",
+          "last_session": "2017-09-13",
+          "adjustment": 0.2575
+        },
+        {
+          "symbol": "ZCZ17",
+          "expiry": "2017-12-14",
+          "first_session": "2017-09-14",
+          "last_session": "2017-12-13",
+          "adjustment": 0.22
+        },
+        {
+          "symbol": "ZCH18",
+          "expiry": "2018-03-14",
+          "first_session": "2017-12-14",
+          "last_session": "2018-03-13",
+          "adjustment": 0.0875
+        },
+        {
+          "symbol": "ZCK18",
+          "expiry": "2018-05-14",
+          "first_session": "2018-03-14",
+          "last_session": "2018-05-11",
+          "adjustment": 0.04
+        },
+        {
+          "symbol": "ZCN18",
+          "expiry": "2018-07-13",
+          "first_session": "2018-05-14",
+          "last_session": "2018-07-12",
+          "adjustment": -0.0025
+        },
+        {
+          "symbol": "ZCU18",
+          "expiry": "2018-09-14",
+          "first_session": "2018-07-13",
+          "last_session": "2018-09-13",
+          "adjustment": 0.2275
+        },
+        {
+          "symbol": "ZCZ18",
+          "expiry": "2018-12-14",
+          "first_session": "2018-09-14",
+          "last_session": "2018-12-13",
+          "adjustment": 0.185
+        },
+        {
+          "symbol": "ZCH19",
+          "expiry": "2019-03-14",
+          "first_session": "2018-12-14",
+          "last_session": "2019-03-13",
+          "adjustment": 0.05
+        },
+        {
+          "symbol": "ZCK19",
+          "expiry": "2019-05-14",
+          "first_session": "2019-03-14",
+          "last_session": "2019-05-13",
+          "adjustment": 0.0075
+        },
+        {
+          "symbol": "ZCN19",
+          "expiry": "2019-07-12",
+          "first_session": "2019-05-14",
+          "last_session": "2019-07-11",
+          "adjustment": -0.0425
+        },
+        {
+          "symbol": "ZCU19",
+          "expiry": "2019-09-13",
+          "first_session": "2019-07-12",
+          "last_session": "2019-09-12",
+          "adjustment": 0.2325
+        },
+        {
+          "symbol": "ZCZ19",
+          "expiry": "2019-12-13",
+          "first_session": "2019-09-13",
+          "last_session": "2019-12-12",
+          "adjustment": 0.1875
+        },
+        {
+          "symbol": "ZCH20",
+          "expiry": "2020-03-13",
+          "first_session": "2019-12-13",
+          "last_session": "2020-03-12",
+          "adjustment": 0.0575
+        },
+        {
+          "symbol": "ZCK20",
+          "expiry": "2020-05-14",
+          "first_session": "2020-03-13",
+          "last_session": "2020-05-13",
+          "adjustment": 0.02
+        },
+        {
+          "symbol": "ZCN20",
+          "expiry": "2020-07-14",
+          "first_session": "2020-05-14",
+          "last_session": "2020-07-13",
+          "adjustment": -0.015
+        },
+        {
+          "symbol": "ZCU20",
+          "expiry": "2020-09-14",
+          "first_session": "2020-07-14",
+          "last_session": "2020-09-11",
+          "adjustment": 0.2625
+        },
+        {
+          "symbol": "ZCZ20",
+          "expiry": "2020-12-14",
+          "first_session": "2020-09-14",
+          "last_session": "2020-12-11",
+          "adjustment": 0.2125
+        },
+        {
+          "symbol": "ZCH21",
+          "expiry": "2021-03-12",
+          "first_session": "2020-12-14",
+          "last_session": "2021-03-11",
+          "adjustment": 0.0475
+        },
+        {
+          "symbol": "ZCK21",
+          "expiry": "2021-05-14",
+          "first_session": "2021-03-12",
+          "last_session": "2021-05-13",
+          "adjustment": 0.0
+        },
+        {
+          "symbol": "ZCN21",
+          "expiry": "2021-07-14",
+          "first_session": "2021-05-14",
+          "last_session": "2021-07-13",
+          "adjustment": -0.04
+        },
+        {
+          "symbol": "ZCU21",
+          "expiry": "2021-09-14",
+          "first_session": "2021-07-14",
+          "last_session": "2021-09-13",
+          "adjustment": 0.1825
+        },
+        {
+          "symbol": "ZCZ21",
+          "expiry": "2021-12-14",
+          "first_session": "2021-09-14",
+          "last_session": "2021-12-13",
+          "adjustment": 0.1425
+        },
+        {
+          "symbol": "ZCH22",
+          "expiry": "2022-03-14",
+          "first_session": "2021-12-14",
+          "last_session": "2022-03-11",
+          "adjustment": 0.005
+        },
+        {
+          "symbol": "ZCK22",
+          "expiry": "2022-05-13",
+          "first_session": "2022-03-14",
+          "last_session": "2022-05-12",
+          "adjustment": -0.0375
+        },
+        {
+          "symbol": "ZCN22",
+          "expiry": "2022-07-14",
+          "first_session": "2022-05-13",
+          "last_session": "2022-07-13",
+          "adjustment": -0.08
+        },
+        {
+          "symbol": "ZCU22",
+          "expiry": "2022-09-14",
+          "first_session": "2022-07-14",
+          "last_session": "2022-09-13",
+          "adjustment": 0.1675
+        },
+        {
+          "symbol": "ZCZ22",
+          "expiry": "2022-12-14",
+          "first_session": "2022-09-14",
+          "last_session": "2022-12-13",
+          "adjustment": 0.1225
+        },
+        {
+          "symbol": "ZCH23",
+          "expiry": "2023-03-14",
+          "first_session": "2022-12-14",
+          "last_session": "2023-03-13",
+          "adjustment": -0.015
+        },
+        {
+          "symbol": "ZCK23",
+          "expiry": "2023-05-12",
+          "first_session": "2023-03-14",
+          "last_session": "2023-05-11",
+          "adjustment": -0.0575
+        },
+        {
+          "symbol": "ZCN23",
+          "expiry": "2023-07-14",
+          "first_session": "2023-05-12",
+          "last_session": "2023-07-13",
+          "adjustment": -0.1075
+        },
+        {
+          "symbol": "ZCU23",
+          "expiry": "2023-09-14",
+          "first_session": "2023-07-14",
+          "last_session": "2023-09-13",
+          "adjustment": 0.195
+        },
+        {
+          "symbol": "ZCZ23",
+          "expiry": "2023-12-14",
+          "first_session": "2023-09-14",
+          "last_session": "2023-12-13",
+          "adjustment": 0.1475
+        },
+        {
+          "symbol": "ZCH24",
+          "expiry": "2024-03-14",
+          "first_session": "2023-12-14",
+          "last_session": "2024-03-13",
+          "adjustment": 0.0075
+        },
+        {
+          "symbol": "ZCK24",
+          "expiry": "2024-05-14",
+          "first_session": "2024-03-14",
+          "last_session": "2024-05-13",
+          "adjustment": -0.04
+        },
+        {
+          "symbol": "ZCN24",
+          "expiry": "2024-07-12",
+          "first_session": "2024-05-14",
+          "last_session": "2024-07-11",
+          "adjustment": -0.085
+        },
+        {
+          "symbol": "ZCU24",
+          "expiry": "2024-09-13",
+          "first_session": "2024-07-12",
+          "last_session": "2024-09-12",
+          "adjustment": 0.21
+        },
+        {
+          "symbol": "ZCZ24",
+          "expiry": "2024-12-13",
+          "first_session": "2024-09-13",
+          "last_session": "2024-12-12",
+          "adjustment": 0.16
+        },
+        {
+          "symbol": "ZCH25",
+          "expiry": "2025-03-14",
+          "first_session": "2024-12-13",
+          "last_session": "2024-12-31",
+          "adjustment": 0.0
+        }
+      ]
+    }
+  },
+  "source": "research/corn/fixtures/generate.py"
+}

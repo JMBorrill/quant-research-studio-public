@@ -1,0 +1,517 @@
+{
+  "id": "news_trend",
+  "version": 1,
+  "title": "News and technical trend",
+  "description": "Long one contract when MACD 12/26/9 crosses above its signal line while the close is above its 200-session average and the news is positive: the mean sentiment of the stories published in the last 3 days, as a model rated them. Flat when MACD crosses below its signal line, whatever the news.",
+  "required_bar": "1D",
+  "conditions": [
+    "Trend and momentum: it buys a MACD cross-above only in an uptrend (close above SMA 200), and only when the recent news agrees.",
+    "News sentiment is read only as it could have been known: each story counts from its publication plus a declared 5-minute processing latency, and only stories published in the 3 days before a close count there. Each story counts once, in its latest version by then; later copies of a story's text from other outlets are dropped.",
+    "Missing or stale sentiment (no rated story in the last 3 days) blocks new entries. Exits do not depend on the news: a MACD cross-below always exits.",
+    "Sentiment comes from a model's rating of each story, recorded once and replayed. Ratings recorded after the stories could have been used are exploratory evidence on real news; the fixture's stories are invented, so its runs are synthetic.",
+    "Long or flat only; it never sells short.",
+    "Daily bars. Signals are decided at the close and filled at the next session's open, with the backtest's commission and slippage."
+  ],
+  "fixture": {
+    "declaration": {
+      "name": "News and technical trend template fixture",
+      "columns": {
+        "date": "Date",
+        "open": "Open",
+        "high": "High",
+        "low": "Low",
+        "close": "Close"
+      },
+      "date_format": "%Y-%m-%d",
+      "price_unit": "currency",
+      "calendar": "NYSE",
+      "instrument": {
+        "symbol": "FIX",
+        "currency": "USD",
+        "multiplier": 50,
+        "tick_size": 0.25,
+        "margin_init": 0.1,
+        "margin_maint": 0.05,
+        "expiry": "2030-12-31"
+      },
+      "evidence_class": "synthetic",
+      "source": "qrs/templates/news_trend.csv: a constructed price path on NYSE sessions whose signals are worked out in tests/test_templates.py",
+      "redistributable": true
+    },
+    "fills": [
+      {
+        "session": "2023-10-23",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 112.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2023-11-15",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 113.25,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-07-01",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 116.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-07-25",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 118.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-08-19",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 118.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-09-12",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 121.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-10-04",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 121.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2024-10-29",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 124.25,
+        "commission": 2.5,
+        "slippage": 12.5
+      }
+    ],
+    "documents": {
+      "kind": "qrs/documents",
+      "name": "News and technical trend template stories",
+      "columns": {
+        "id": "Id",
+        "published": "Published",
+        "text": "Body",
+        "title": "Headline",
+        "revision": "Version",
+        "url": "Link"
+      },
+      "evidence_class": "synthetic",
+      "source": "qrs/templates/news_trend.documents.csv: invented stories, with a correction, a syndicated copy and a story published after the close",
+      "redistributable": true,
+      "hosted_processing": false
+    },
+    "extraction": {
+      "name": "News and technical trend template sentiment",
+      "documents": "sha256:8e489f633c5381bc3e05a8d11ecd40d95634bcbc9bbe57f3066dba31e5ece64b",
+      "provider": "fixture",
+      "model": "fixture",
+      "endpoint": "news_trend.answers.json",
+      "instructions": "Rate the story's tone towards the market, from -1 (very negative) to 1 (very positive). Answer with JSON only.",
+      "prompt": "Headline: {title}\n\n{text}",
+      "fields": [
+        {
+          "name": "sentiment",
+          "description": "The story's tone towards the market.",
+          "unit": "score",
+          "minimum": -1,
+          "maximum": 1
+        }
+      ],
+      "max_output_tokens": 50,
+      "latency_seconds": 300,
+      "capture": "news_trend template fixture",
+      "dedupe": true,
+      "budget": {
+        "max_requests": 20,
+        "max_cost": 0,
+        "input_price": 0,
+        "output_price": 0
+      },
+      "redistributable": true
+    }
+  },
+  "strategy": {
+    "kind": "qrs/strategy",
+    "version": 1,
+    "name": "News and technical trend",
+    "nodes": [
+      {
+        "id": "bars",
+        "operator": "qrs.dataset",
+        "version": 1,
+        "params": {
+          "dataset_id": ""
+        }
+      },
+      {
+        "id": "macd",
+        "operator": "qrs.macd",
+        "version": 1,
+        "params": {
+          "fast": 12,
+          "slow": 26,
+          "signal": 9,
+          "column": "close"
+        }
+      },
+      {
+        "id": "cross_up",
+        "operator": "qrs.cross",
+        "version": 1,
+        "params": {
+          "direction": "above"
+        }
+      },
+      {
+        "id": "cross_down",
+        "operator": "qrs.cross",
+        "version": 1,
+        "params": {
+          "direction": "below"
+        }
+      },
+      {
+        "id": "close",
+        "operator": "qrs.column",
+        "version": 1,
+        "params": {
+          "column": "close"
+        }
+      },
+      {
+        "id": "trend",
+        "operator": "qrs.sma",
+        "version": 1,
+        "params": {
+          "period": 200,
+          "column": "close"
+        }
+      },
+      {
+        "id": "uptrend",
+        "operator": "qrs.compare",
+        "version": 1,
+        "params": {
+          "comparison": ">"
+        }
+      },
+      {
+        "id": "sentiment",
+        "operator": "qrs.as_of_aggregate",
+        "version": 1,
+        "params": {
+          "dataset_id": "",
+          "column": "sentiment",
+          "window_days": 3,
+          "statistic": "mean",
+          "min_count": 1
+        }
+      },
+      {
+        "id": "positive",
+        "operator": "qrs.threshold",
+        "version": 1,
+        "params": {
+          "comparison": ">",
+          "value": 0.0
+        }
+      },
+      {
+        "id": "trend_cross",
+        "operator": "qrs.all",
+        "version": 1,
+        "params": {}
+      },
+      {
+        "id": "entry",
+        "operator": "qrs.all",
+        "version": 1,
+        "params": {}
+      },
+      {
+        "id": "position",
+        "operator": "qrs.long_flat",
+        "version": 1,
+        "params": {
+          "quantity": 1
+        }
+      },
+      {
+        "id": "backtest",
+        "operator": "qrs.backtest",
+        "version": 1,
+        "params": {
+          "initial_cash": 100000,
+          "commission_per_contract": 2.5,
+          "slippage_ticks": 1
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "macd",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "close",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "trend",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "sentiment",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "macd",
+          "port": "macd"
+        },
+        "target": {
+          "node": "cross_up",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "macd",
+          "port": "signal"
+        },
+        "target": {
+          "node": "cross_up",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "macd",
+          "port": "macd"
+        },
+        "target": {
+          "node": "cross_down",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "macd",
+          "port": "signal"
+        },
+        "target": {
+          "node": "cross_down",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "close",
+          "port": "series"
+        },
+        "target": {
+          "node": "uptrend",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "trend",
+          "port": "series"
+        },
+        "target": {
+          "node": "uptrend",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "sentiment",
+          "port": "series"
+        },
+        "target": {
+          "node": "positive",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "cross_up",
+          "port": "signal"
+        },
+        "target": {
+          "node": "trend_cross",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "uptrend",
+          "port": "signal"
+        },
+        "target": {
+          "node": "trend_cross",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "trend_cross",
+          "port": "signal"
+        },
+        "target": {
+          "node": "entry",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "positive",
+          "port": "signal"
+        },
+        "target": {
+          "node": "entry",
+          "port": "b"
+        }
+      },
+      {
+        "source": {
+          "node": "entry",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "entry"
+        }
+      },
+      {
+        "source": {
+          "node": "cross_down",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "exit"
+        }
+      },
+      {
+        "source": {
+          "node": "position",
+          "port": "positions"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "positions"
+        }
+      }
+    ],
+    "layout": {
+      "bars": {
+        "x": 0,
+        "y": 280
+      },
+      "macd": {
+        "x": 280,
+        "y": 40
+      },
+      "close": {
+        "x": 280,
+        "y": 240
+      },
+      "trend": {
+        "x": 280,
+        "y": 360
+      },
+      "sentiment": {
+        "x": 280,
+        "y": 520
+      },
+      "cross_up": {
+        "x": 560,
+        "y": 0
+      },
+      "cross_down": {
+        "x": 560,
+        "y": 120
+      },
+      "uptrend": {
+        "x": 560,
+        "y": 300
+      },
+      "positive": {
+        "x": 560,
+        "y": 520
+      },
+      "trend_cross": {
+        "x": 840,
+        "y": 160
+      },
+      "entry": {
+        "x": 1120,
+        "y": 300
+      },
+      "position": {
+        "x": 1400,
+        "y": 200
+      },
+      "backtest": {
+        "x": 1680,
+        "y": 280
+      }
+    }
+  }
+}

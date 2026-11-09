@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "date": "Date",
+    "open": "Open",
+    "high": "High",
+    "low": "Low",
+    "close": "Close"
+  },
+  "date_format": "%Y-%m-%d",
+  "price_unit": "cents",
+  "calendar": "CBOT_Agriculture",
+  "evidence_class": "synthetic",
+  "redistributable": true,
+  "name": "Corn, December 2024 contract (synthetic)",
+  "instrument": {
+    "symbol": "ZCZ24",
+    "currency": "USD",
+    "multiplier": 5000,
+    "tick_size": 0.0025,
+    "margin_init": 0.06,
+    "margin_maint": 0.05,
+    "expiry": "2024-12-13"
+  },
+  "source": "research/corn/fixtures/generate.py"
+}

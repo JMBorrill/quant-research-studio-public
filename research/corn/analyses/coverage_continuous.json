@@ -1,0 +1,14 @@
+{
+  "name": "Coverage continuous",
+  "method": "qrs.coverage",
+  "method_version": 1,
+  "inputs": {
+    "data": {
+      "kind": "bars",
+      "dataset": "${continuous}",
+      "measure": "price_change"
+    }
+  },
+  "params": {},
+  "project": "${project}"
+}

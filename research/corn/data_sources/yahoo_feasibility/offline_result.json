@@ -1,0 +1,47 @@
+{
+  "checked_at": "2026-11-04T16:30:09.488525+00:00",
+  "yfinance_version": "1.8.0",
+  "mode": "offline_interception_not_download",
+  "source_sha256": {
+    "base.py": "fc4ada71999b99865cca20857408513a84378e6eaf3ce89b95a270d5d47154e8",
+    "scrapers/history.py": "02ab8ebd4d3ba2cdf205f5bf3e29bbb6141404665c3a1c3fbcbb9e6c44c17e28",
+    "utils.py": "389a231e530946a12aff64f902f506b62bfdb1cb847029a933961f8bc683cd47"
+  },
+  "cases": [
+    {
+      "symbol": "ZC=F",
+      "first_intercepted_request": {
+        "url": "https://query2.finance.yahoo.com/v8/finance/chart/ZC=F",
+        "params": {
+          "range": "1d",
+          "interval": "1d"
+        }
+      },
+      "http_dispatches": 0
+    },
+    {
+      "symbol": "ZCH06.CBT",
+      "first_intercepted_request": {
+        "url": "https://query2.finance.yahoo.com/v8/finance/chart/ZCH06.CBT",
+        "params": {
+          "range": "1d",
+          "interval": "1d"
+        }
+      },
+      "http_dispatches": 0
+    },
+    {
+      "symbol": "ZCZ21.CBT",
+      "first_intercepted_request": {
+        "url": "https://query2.finance.yahoo.com/v8/finance/chart/ZCZ21.CBT",
+        "params": {
+          "range": "1d",
+          "interval": "1d"
+        }
+      },
+      "http_dispatches": 0
+    }
+  ],
+  "acquired_rows": 0,
+  "conclusion": "Explicit history dates do not bound cold-cache timezone discovery."
+}

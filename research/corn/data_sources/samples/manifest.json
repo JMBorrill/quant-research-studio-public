@@ -1,0 +1,244 @@
+{
+  "evidence_class": "retrospective",
+  "cutoff": "2021-12-31",
+  "datasets": {
+    "cot_corn.csv": {
+      "rows": 812,
+      "unique_key": [
+        "market_code",
+        "as_of"
+      ],
+      "date_column": "as_of",
+      "min_date": "2006-06-13",
+      "max_date": "2021-12-28",
+      "duplicates": 0,
+      "sha256": "df21d050e791ae69b3f71f5817ae1a08f41abe98df6a4db579a95d57bb87af21"
+    },
+    "crop_condition.csv": {
+      "rows": 19,
+      "unique_key": [
+        "state",
+        "week_ending"
+      ],
+      "date_column": "week_ending",
+      "min_date": "2021-09-26",
+      "max_date": "2021-09-26",
+      "duplicates": 0,
+      "sha256": "963af42c8c44e988e4152e3477a3428d3b33a10cb035233fd1e71b708d9c2d2e"
+    },
+    "wasde_corn.csv": {
+      "rows": 4,
+      "unique_key": [
+        "release_date",
+        "marketing_year",
+        "column_vintage"
+      ],
+      "date_column": "release_date",
+      "min_date": "2021-09-10",
+      "max_date": "2021-09-10",
+      "duplicates": 0,
+      "sha256": "a21a50a8dfbdbe9a63f521b8f5bf6dc446c346443cd6bd377a82e4c84a187502"
+    },
+    "grain_stocks_corn.csv": {
+      "rows": 6,
+      "unique_key": [
+        "as_of",
+        "release_date"
+      ],
+      "date_column": "as_of",
+      "min_date": "2020-03-01",
+      "max_date": "2021-09-01",
+      "duplicates": 0,
+      "sha256": "83b140e8ed3ff97f6b77535eadde95c7bb944f484aaced69fbe21523f4414236"
+    },
+    "corn_geography_2020.csv": {
+      "rows": 49,
+      "unique_key": [
+        "state",
+        "crop_year_end"
+      ],
+      "date_column": "crop_year_end",
+      "min_date": "2020-12-31",
+      "max_date": "2020-12-31",
+      "duplicates": 0,
+      "sha256": "8bdfd22aa8e0f1d034c299071116f7bf3b4e86a73cb3596d7a1e9c00a338d4a5"
+    },
+    "nasa_power_iowa_2021.csv": {
+      "rows": 365,
+      "unique_key": [
+        "date"
+      ],
+      "date_column": "date",
+      "min_date": "2021-01-01",
+      "max_date": "2021-12-31",
+      "duplicates": 0,
+      "sha256": "f4249195cf80292b3e83c00c8e773f08378bccc0aec62f98a50546dbf65c489f"
+    },
+    "noaa_ghcn_iowa_2021.csv": {
+      "rows": 365,
+      "unique_key": [
+        "station",
+        "date"
+      ],
+      "date_column": "date",
+      "min_date": "2021-01-01",
+      "max_date": "2021-12-31",
+      "duplicates": 0,
+      "sha256": "4bc9acf2788d50f39013620c37d00e3a9fdc1d63492d3c404a16e727a097146b"
+    }
+  },
+  "private_usdm_validation": {
+    "rows": 53,
+    "unique_key": [
+      "date"
+    ],
+    "date_column": "date",
+    "min_date": "2020-12-29",
+    "max_date": "2021-12-28",
+    "duplicates": 0
+  },
+  "inputs": [
+    {
+      "file": "wasde0921.txt",
+      "sha256": "8d99c22992859c58ad2cfe3e4b6a8ca1828d31ed5df2c75d0805af48cbe025c4",
+      "source_id": "usda_wasde",
+      "retrieved_at": "2026-11-03T13:57:33.247670+00:00",
+      "license_url": "https://www.nal.usda.gov/web-policies-and-important-links",
+      "redistributable": true,
+      "prepared_input_sha256": "8d99c22992859c58ad2cfe3e4b6a8ca1828d31ed5df2c75d0805af48cbe025c4"
+    },
+    {
+      "file": "prog4021.txt",
+      "sha256": "538401187c7ac5636ae29ef5a732b89017e63e8656de82ca7351f86f643ba969",
+      "source_id": "usda_crop_progress",
+      "retrieved_at": "2026-11-03T13:57:33.247982+00:00",
+      "license_url": "https://www.nal.usda.gov/web-policies-and-important-links",
+      "redistributable": true,
+      "prepared_input_sha256": "538401187c7ac5636ae29ef5a732b89017e63e8656de82ca7351f86f643ba969"
+    },
+    {
+      "file": "grst0921.txt",
+      "sha256": "c5a1898547e03fc4681bcb5a2448d7af8ac838e202001921a2bc4d3f1b9202fa",
+      "source_id": "usda_grain_stocks",
+      "retrieved_at": "2026-11-03T13:57:33.248051+00:00",
+      "license_url": "https://www.nal.usda.gov/web-policies-and-important-links",
+      "redistributable": true,
+      "prepared_input_sha256": "c5a1898547e03fc4681bcb5a2448d7af8ac838e202001921a2bc4d3f1b9202fa"
+    },
+    {
+      "file": "cropan21.txt",
+      "sha256": "cd13fb24a88c0faf1887be2f959b9d64e4cf9204185d64c0a34282c8befcc8de",
+      "source_id": "usda_geography",
+      "retrieved_at": "2026-11-03T13:57:33.248098+00:00",
+      "license_url": "https://www.nal.usda.gov/web-policies-and-important-links",
+      "redistributable": true,
+      "prepared_input_sha256": "cd13fb24a88c0faf1887be2f959b9d64e4cf9204185d64c0a34282c8befcc8de"
+    },
+    {
+      "file": "cot2021.zip",
+      "sha256": "12d5d49a8963367fd3439050e3e20e6a5338757dfa083432795c5556827ff8ae",
+      "source_id": "cftc_disagg",
+      "retrieved_at": "2026-11-03T13:57:34.270580+00:00",
+      "license_url": "https://www.cftc.gov/sites/default/files/cftc/cftcprivacy.htm",
+      "redistributable": true,
+      "prepared_input_sha256": "12d5d49a8963367fd3439050e3e20e6a5338757dfa083432795c5556827ff8ae"
+    },
+    {
+      "file": "power2021.json",
+      "sha256": "809f20bcd8cdcb63a13bee77632b16a57e158acdd62517170b74dc37a6c645ef",
+      "source_id": "nasa_power",
+      "retrieved_at": "2026-11-03T13:57:34.381067+00:00",
+      "license_url": "https://registry.opendata.aws/nasa-power/",
+      "redistributable": true,
+      "prepared_input_sha256": "809f20bcd8cdcb63a13bee77632b16a57e158acdd62517170b74dc37a6c645ef"
+    },
+    {
+      "file": "ghcn2021.json",
+      "sha256": "a90745d47b0c8ff39a0256dbd90a1d006442e0d617a89e2b2a0826c5880acc56",
+      "source_id": "noaa_ghcn",
+      "retrieved_at": "2026-11-03T13:57:34.509544+00:00",
+      "license_url": "https://registry.opendata.aws/noaa-ghcn/",
+      "redistributable": true,
+      "prepared_input_sha256": "a90745d47b0c8ff39a0256dbd90a1d006442e0d617a89e2b2a0826c5880acc56"
+    },
+    {
+      "file": "drought2021.json",
+      "sha256": "ceadf5d94b454061a9f91d760b557cfebf425f6baf730bf3558915ab559bc81b",
+      "source_id": "usdm",
+      "retrieved_at": "2026-11-03T13:57:34.545422+00:00",
+      "license_url": "https://droughtmonitor.unl.edu/About/Permission.aspx",
+      "redistributable": false,
+      "prepared_input_sha256": "ceadf5d94b454061a9f91d760b557cfebf425f6baf730bf3558915ab559bc81b"
+    },
+    {
+      "file": "cot2006_2016.zip",
+      "sha256": "68c593209136ab7cfda2ec17ac5ed0bffb4b19a49f52c01308b4cedb315514c8",
+      "source_id": "cftc_disagg",
+      "retrieved_at": "2026-11-03T13:59:26.375619+00:00",
+      "license_url": "https://www.cftc.gov/sites/default/files/cftc/cftcprivacy.htm",
+      "redistributable": true,
+      "prepared_input_sha256": "68c593209136ab7cfda2ec17ac5ed0bffb4b19a49f52c01308b4cedb315514c8"
+    },
+    {
+      "file": "cot2017.zip",
+      "sha256": "6fc467b989df527a4fbea4ba07185e8951f35cb72563f156488904a37c100e43",
+      "source_id": "cftc_disagg",
+      "retrieved_at": "2026-11-03T13:59:26.375920+00:00",
+      "license_url": "https://www.cftc.gov/sites/default/files/cftc/cftcprivacy.htm",
+      "redistributable": true,
+      "prepared_input_sha256": "6fc467b989df527a4fbea4ba07185e8951f35cb72563f156488904a37c100e43"
+    },
+    {
+      "file": "cot2018.zip",
+      "sha256": "df4bf7d72e8984d6ea04087f793c9f2bf3503ea8c2149f4b01eedeef4fbe40a8",
+      "source_id": "cftc_disagg",
+      "retrieved_at": "2026-11-03T13:59:26.376012+00:00",
+      "license_url": "https://www.cftc.gov/sites/default/files/cftc/cftcprivacy.htm",
+      "redistributable": true,
+      "prepared_input_sha256": "df4bf7d72e8984d6ea04087f793c9f2bf3503ea8c2149f4b01eedeef4fbe40a8"
+    },
+    {
+      "file": "cot2019.zip",
+      "sha256": "942a438bcc6f66e65aaf594a1a1fdb8c1505fe4a0feece77a1fd97270317e753",
+      "source_id": "cftc_disagg",
+      "retrieved_at": "2026-11-03T13:59:26.376073+00:00",
+      "license_url": "https://www.cftc.gov/sites/default/files/cftc/cftcprivacy.htm",
+      "redistributable": true,
+      "prepared_input_sha256": "942a438bcc6f66e65aaf594a1a1fdb8c1505fe4a0feece77a1fd97270317e753"
+    },
+    {
+      "file": "cot2020.zip",
+      "sha256": "0aa03c0fd6360f56b6897b6eaff30e8dba774c826bf93cac61598312e19bd1cd",
+      "source_id": "cftc_disagg",
+      "retrieved_at": "2026-11-03T13:59:27.121370+00:00",
+      "license_url": "https://www.cftc.gov/sites/default/files/cftc/cftcprivacy.htm",
+      "redistributable": true,
+      "prepared_input_sha256": "0aa03c0fd6360f56b6897b6eaff30e8dba774c826bf93cac61598312e19bd1cd"
+    },
+    {
+      "file": "gefs20210601.idx",
+      "sha256": "21c91d911e801a8c0071df732af0b94b87d1e10ebeeb5ee938012b537b0b6989",
+      "source_id": "noaa_gefs",
+      "retrieved_at": "2026-11-03T13:59:27.535829+00:00",
+      "license_url": "https://registry.opendata.aws/noaa-gefs/",
+      "redistributable": true,
+      "prepared_input_sha256": "21c91d911e801a8c0071df732af0b94b87d1e10ebeeb5ee938012b537b0b6989"
+    },
+    {
+      "file": "cdl_ia2020.html",
+      "sha256": "22008d7c7768171aeba51449853f449f3ba76a684d7f19c528b5a548a26a2f3d",
+      "source_id": "usda_cdl",
+      "retrieved_at": "2026-11-03T13:59:27.615905+00:00",
+      "license_url": "https://www.nass.usda.gov/Research_and_Science/Cropland/metadata/metadata_ia20.htm",
+      "redistributable": true,
+      "prepared_input_sha256": "22008d7c7768171aeba51449853f449f3ba76a684d7f19c528b5a548a26a2f3d"
+    }
+  ],
+  "evidence": {
+    "crop_progress_excerpt.txt": "14f13d9ce5180bbbb2c1ee65ce91d0906c6af5bf786e6f6d87f26f544f4c1321",
+    "wasde_excerpt.txt": "d1255636be1d720e98c547bf76d705935ce0633603e1cb5056e1f1e96916e1f0",
+    "grain_stocks_excerpt.txt": "12cdbf041bca84e117f549ef87e29521d29d9bcb5bc311ae3fd7b0766657fa3e",
+    "geography_excerpt.txt": "1ec0916097f9f06035649fb595087adf9d9e3ee1bce37a5ddc2f437029ccb930",
+    "gefs_20210601_00_f006.idx": "21c91d911e801a8c0071df732af0b94b87d1e10ebeeb5ee938012b537b0b6989"
+  }
+}

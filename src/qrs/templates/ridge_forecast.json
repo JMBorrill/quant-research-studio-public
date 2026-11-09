@@ -1,0 +1,484 @@
+{
+  "id": "ridge_forecast",
+  "version": 1,
+  "title": "Ridge return forecast",
+  "description": "Long one contract while a walk-forward ridge regression predicts the next 5 sessions' return above 1%; flat otherwise. Its features are the 5-session return, RSI 14 and the MACD histogram, and it refits every 20 sessions on every target known so far.",
+  "required_bar": "1D",
+  "conditions": [
+    "Persistent price behaviour: each model learns how the 5-session return, RSI 14 and the MACD histogram relate to the next 5 sessions' return, and assumes that relation holds until its next fit.",
+    "Costs: it enters only when the predicted 5-session return exceeds 1% (0.01). A round trip costs two $2.50 commissions and two ticks of slippage ($25), $30 in all, which is under 0.72% of a contract's value ($50 × price) at the fixture's lowest price, 84.50.",
+    "Chronological training: a model fitted at a session's close trains only on rows whose 5-session target is known by then, with means and scales from those rows only, and predictions use the latest model fitted by each session's close. The first model needs 60 training rows, so the first signal comes at the close of the 98th session.",
+    "Long or flat only; it never sells short.",
+    "Daily bars. Signals are decided at the close and filled at the next session's open, with the backtest's commission and slippage."
+  ],
+  "fixture": {
+    "declaration": {
+      "name": "Ridge return forecast template fixture",
+      "columns": {
+        "date": "Date",
+        "open": "Open",
+        "high": "High",
+        "low": "Low",
+        "close": "Close"
+      },
+      "date_format": "%Y-%m-%d",
+      "price_unit": "currency",
+      "calendar": null,
+      "instrument": {
+        "symbol": "FIX",
+        "currency": "USD",
+        "multiplier": 50,
+        "tick_size": 0.25,
+        "margin_init": 0.1,
+        "margin_maint": 0.05,
+        "expiry": "2030-12-31"
+      },
+      "evidence_class": "synthetic",
+      "source": "qrs/templates/ridge_forecast.csv: a constructed price path whose models, predictions and signals are worked out in tests/test_templates.py",
+      "redistributable": true
+    },
+    "fills": [
+      {
+        "session": "2026-05-21",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 93.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-06-08",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 104.25,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-07-20",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 86.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-08-17",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 99.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-09-24",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 86.75,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-09-25",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 85.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-09-29",
+        "side": "BUY",
+        "quantity": 1,
+        "price": 86.25,
+        "commission": 2.5,
+        "slippage": 12.5
+      },
+      {
+        "session": "2026-10-26",
+        "side": "SELL",
+        "quantity": 1,
+        "price": 101.0,
+        "commission": 2.5,
+        "slippage": 12.5
+      }
+    ]
+  },
+  "strategy": {
+    "kind": "qrs/strategy",
+    "version": 1,
+    "name": "Ridge return forecast",
+    "nodes": [
+      {
+        "id": "bars",
+        "operator": "qrs.dataset",
+        "version": 1,
+        "params": {
+          "dataset_id": ""
+        }
+      },
+      {
+        "id": "change",
+        "operator": "qrs.returns",
+        "version": 1,
+        "params": {
+          "period": 5,
+          "column": "close"
+        }
+      },
+      {
+        "id": "rsi",
+        "operator": "qrs.rsi",
+        "version": 1,
+        "params": {
+          "period": 14,
+          "column": "close"
+        }
+      },
+      {
+        "id": "macd",
+        "operator": "qrs.macd",
+        "version": 1,
+        "params": {
+          "fast": 12,
+          "slow": 26,
+          "signal": 9,
+          "column": "close"
+        }
+      },
+      {
+        "id": "features",
+        "operator": "qrs.table",
+        "version": 1,
+        "params": {
+          "name": "change"
+        }
+      },
+      {
+        "id": "add_rsi",
+        "operator": "qrs.merge",
+        "version": 1,
+        "params": {
+          "name": "rsi"
+        }
+      },
+      {
+        "id": "add_macd",
+        "operator": "qrs.merge",
+        "version": 1,
+        "params": {
+          "name": "macd_histogram"
+        }
+      },
+      {
+        "id": "target",
+        "operator": "qrs.forward_return",
+        "version": 1,
+        "params": {
+          "horizon": 5,
+          "column": "close"
+        }
+      },
+      {
+        "id": "fit",
+        "operator": "qrs.fit_ridge",
+        "version": 1,
+        "params": {
+          "min_rows": 60,
+          "every": 20,
+          "window": "expanding",
+          "alpha": 1.0
+        }
+      },
+      {
+        "id": "predict",
+        "operator": "qrs.predict",
+        "version": 1,
+        "params": {}
+      },
+      {
+        "id": "entry",
+        "operator": "qrs.threshold",
+        "version": 1,
+        "params": {
+          "comparison": ">",
+          "value": 0.01
+        }
+      },
+      {
+        "id": "exit",
+        "operator": "qrs.not",
+        "version": 1,
+        "params": {}
+      },
+      {
+        "id": "position",
+        "operator": "qrs.long_flat",
+        "version": 1,
+        "params": {
+          "quantity": 1
+        }
+      },
+      {
+        "id": "backtest",
+        "operator": "qrs.backtest",
+        "version": 1,
+        "params": {
+          "initial_cash": 100000,
+          "commission_per_contract": 2.5,
+          "slippage_ticks": 1
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "change",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "rsi",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "macd",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "target",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "bars",
+          "port": "bars"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "bars"
+        }
+      },
+      {
+        "source": {
+          "node": "change",
+          "port": "series"
+        },
+        "target": {
+          "node": "features",
+          "port": "series"
+        }
+      },
+      {
+        "source": {
+          "node": "features",
+          "port": "table"
+        },
+        "target": {
+          "node": "add_rsi",
+          "port": "table"
+        }
+      },
+      {
+        "source": {
+          "node": "rsi",
+          "port": "series"
+        },
+        "target": {
+          "node": "add_rsi",
+          "port": "series"
+        }
+      },
+      {
+        "source": {
+          "node": "add_rsi",
+          "port": "table"
+        },
+        "target": {
+          "node": "add_macd",
+          "port": "table"
+        }
+      },
+      {
+        "source": {
+          "node": "macd",
+          "port": "histogram"
+        },
+        "target": {
+          "node": "add_macd",
+          "port": "series"
+        }
+      },
+      {
+        "source": {
+          "node": "add_macd",
+          "port": "table"
+        },
+        "target": {
+          "node": "fit",
+          "port": "features"
+        }
+      },
+      {
+        "source": {
+          "node": "target",
+          "port": "label"
+        },
+        "target": {
+          "node": "fit",
+          "port": "target"
+        }
+      },
+      {
+        "source": {
+          "node": "fit",
+          "port": "model"
+        },
+        "target": {
+          "node": "predict",
+          "port": "model"
+        }
+      },
+      {
+        "source": {
+          "node": "add_macd",
+          "port": "table"
+        },
+        "target": {
+          "node": "predict",
+          "port": "features"
+        }
+      },
+      {
+        "source": {
+          "node": "predict",
+          "port": "series"
+        },
+        "target": {
+          "node": "entry",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "entry",
+          "port": "signal"
+        },
+        "target": {
+          "node": "exit",
+          "port": "a"
+        }
+      },
+      {
+        "source": {
+          "node": "entry",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "entry"
+        }
+      },
+      {
+        "source": {
+          "node": "exit",
+          "port": "signal"
+        },
+        "target": {
+          "node": "position",
+          "port": "exit"
+        }
+      },
+      {
+        "source": {
+          "node": "position",
+          "port": "positions"
+        },
+        "target": {
+          "node": "backtest",
+          "port": "positions"
+        }
+      }
+    ],
+    "layout": {
+      "bars": {
+        "x": 0,
+        "y": 280
+      },
+      "change": {
+        "x": 280,
+        "y": 40
+      },
+      "rsi": {
+        "x": 280,
+        "y": 200
+      },
+      "macd": {
+        "x": 280,
+        "y": 360
+      },
+      "target": {
+        "x": 280,
+        "y": 560
+      },
+      "features": {
+        "x": 560,
+        "y": 40
+      },
+      "add_rsi": {
+        "x": 840,
+        "y": 120
+      },
+      "add_macd": {
+        "x": 1120,
+        "y": 200
+      },
+      "fit": {
+        "x": 1400,
+        "y": 400
+      },
+      "predict": {
+        "x": 1680,
+        "y": 200
+      },
+      "entry": {
+        "x": 1960,
+        "y": 120
+      },
+      "exit": {
+        "x": 1960,
+        "y": 320
+      },
+      "position": {
+        "x": 2240,
+        "y": 200
+      },
+      "backtest": {
+        "x": 2520,
+        "y": 280
+      }
+    }
+  }
+}
